@@ -631,6 +631,8 @@ function FinalCTA() {
   );
 }
 function BomaLeadForm() {
+  const [submitted, setSubmitted] = React.useState(false);
+
   React.useEffect(() => {
     window.allowSubmit = function () {
       const submitButton = document.getElementById("boma-form-submit");
@@ -658,23 +660,48 @@ function BomaLeadForm() {
     };
   }, []);
 
+  if (submitted) {
+    return (
+      <div
+        id="guide-form"
+        className="rounded-3xl border border-[#6FD7E3]/20 bg-[#0E1020]/70 p-8 text-center shadow-2xl shadow-black/20"
+      >
+        <h2 className="text-3xl font-semibold text-white">
+          Your guide is on its way
+        </h2>
+        <p className="mx-auto mt-4 max-w-xl text-lg leading-8 text-white/70">
+          Thank you. Please check your inbox for the free guide. You can continue browsing the website below.
+        </p>
+      </div>
+    );
+  }
+
   return (
-    <div className="rounded-3xl border border-[#6FD7E3]/20 bg-white p-8 text-[#26414f] shadow-2xl shadow-black/20">
-      <h2 className="text-center text-3xl font-semibold text-[#26414f]">
+    <div
+      id="guide-form"
+      className="rounded-3xl border border-[#6FD7E3]/20 bg-[#0E1020]/70 p-8 text-white shadow-2xl shadow-black/20"
+    >
+      <h2 className="text-center text-3xl font-semibold text-white">
         Get the free asset protection guide
       </h2>
 
-      <p className="mx-auto mt-4 max-w-xl text-center text-sm leading-6 text-[#26414f]/80">
+      <p className="mx-auto mt-4 max-w-xl text-center text-sm leading-6 text-white/70">
         Enter your details below, and we’ll send the free guide to your inbox. You may also receive occasional related insights from FWP Advisory about asset protection, succession planning, and family wealth strategy. You can unsubscribe at any time.
       </p>
+
+      <iframe name="boma-submit-frame" className="hidden" title="BOMA form submission" />
 
       <form
         action="https://public2.bomamarketing.com/lp/KBL0fB7V"
         method="post"
+        target="boma-submit-frame"
         className="mt-7 space-y-5"
+        onSubmit={() => {
+          setTimeout(() => setSubmitted(true), 1000);
+        }}
       >
         <div>
-          <label htmlFor="email" className="mb-2 block text-sm font-semibold text-[#26414f]">
+          <label htmlFor="email" className="mb-2 block text-sm font-semibold text-white">
             Email *
           </label>
           <input
@@ -682,12 +709,12 @@ function BomaLeadForm() {
             id="email"
             name="email"
             required
-            className="w-full rounded-xl border border-[#26414f]/20 px-4 py-3 text-[#26414f] outline-none focus:border-[#6FD7E3]"
+            className="w-full rounded-xl border border-white/10 bg-[#0E1020]/75 px-4 py-3 text-white outline-none focus:border-[#6FD7E3]"
           />
         </div>
 
         <div>
-          <label htmlFor="firstName" className="mb-2 block text-sm font-semibold text-[#26414f]">
+          <label htmlFor="firstName" className="mb-2 block text-sm font-semibold text-white">
             First name *
           </label>
           <input
@@ -695,7 +722,7 @@ function BomaLeadForm() {
             id="firstName"
             name="firstName"
             required
-            className="w-full rounded-xl border border-[#26414f]/20 px-4 py-3 text-[#26414f] outline-none focus:border-[#6FD7E3]"
+            className="w-full rounded-xl border border-white/10 bg-[#0E1020]/75 px-4 py-3 text-white outline-none focus:border-[#6FD7E3]"
           />
         </div>
 
@@ -725,7 +752,7 @@ function BomaLeadForm() {
             id="boma-form-submit"
             value="Submit"
             disabled
-            className="inline-flex cursor-pointer items-center justify-center rounded-full bg-[#26414f] px-8 py-3 text-sm font-semibold text-white transition hover:bg-[#0E1020] disabled:cursor-not-allowed disabled:opacity-50"
+            className="inline-flex cursor-pointer items-center justify-center rounded-full bg-[#6FD7E3] px-8 py-3 text-sm font-semibold text-[#0E1020] shadow-lg shadow-[#6FD7E3]/20 transition hover:-translate-y-0.5 hover:bg-[#8FE3EC] disabled:cursor-not-allowed disabled:opacity-50"
           />
         </div>
       </form>
