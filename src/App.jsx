@@ -53,7 +53,7 @@ function LogoMark({ href = "#/" }) {
       <img
         src="/fwp-logo.png"
         alt="Family Wealth Protection Advisory"
-        className="h-14 w-auto"
+        className="h-24 w-auto"
       />
     </a>
   );
