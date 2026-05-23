@@ -574,7 +574,7 @@ function GuidePage() {
             <p>• A simple net equity worksheet to start the conversation</p>
           </div>
         </div>
-        <div className="rounded-3xl border border-[#6FD7E3]/20 bg-[#6FD7E3]/10 p-8 md:p-10">
+        
           <BomaLeadForm />
       </section>
     </PageShell>
