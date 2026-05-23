@@ -181,13 +181,23 @@ function LeadMagnetSection({ compact = false }) {
 <p className="mt-3 text-sm leading-6 text-white/60">
   Interested, but not ready to book a Discovery Meeting yet? Get the free guide first.
 </p>
-<a
-  href="#guide-form"
+<button
+  type="button"
+  onClick={() => {
+    document.getElementById("guide-form")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }}
   className="mt-6 inline-flex items-center justify-center rounded-full bg-[#6FD7E3] px-8 py-3 text-sm font-semibold text-[#0E1020] shadow-lg shadow-[#6FD7E3]/20 transition hover:-translate-y-0.5 hover:bg-[#8FE3EC]"
 >
   Download Free Guide →
-</a>
-</a>
+</button>
+  }}
+  className="mt-6 inline-flex items-center justify-center rounded-full bg-[#6FD7E3] px-8 py-3 text-sm font-semibold text-[#0E1020] shadow-lg shadow-[#6FD7E3]/20 transition hover:-translate-y-0.5 hover:bg-[#8FE3EC]"
+>
+  Download Free Guide →
+</button>
         </div>
       </div>
     </section>
