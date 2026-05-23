@@ -301,7 +301,7 @@ function ProcessStep({ number, title, children }) {
 
 function Hero() {
   return (
-    <section className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 px-6 pb-24 pt-16 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:pb-32 lg:pt-24">
+    <section className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 px-6 pb-24 pt-10 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:pb-32 lg:pt-16">
       <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
         <SectionLabel>Asset protection & succession strategy</SectionLabel>
         <h1 className="max-w-4xl text-5xl font-semibold tracking-tight text-white md:text-7xl">Strengthen Your Asset Protection and Succession Strategy</h1>
