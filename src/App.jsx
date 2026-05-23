@@ -631,30 +631,104 @@ function FinalCTA() {
   );
 }
 function BomaLeadForm() {
+  React.useEffect(() => {
+    window.allowSubmit = function () {
+      const submitButton = document.getElementById("boma-form-submit");
+      if (submitButton) submitButton.disabled = false;
+    };
+
+    window.denySubmit = function () {
+      const submitButton = document.getElementById("boma-form-submit");
+      if (submitButton) submitButton.disabled = true;
+    };
+
+    const recaptchaScript = document.createElement("script");
+    recaptchaScript.src = "https://www.google.com/recaptcha/api.js";
+    recaptchaScript.async = true;
+    recaptchaScript.defer = true;
+    document.body.appendChild(recaptchaScript);
+
+    const bomaScript = document.createElement("script");
+    bomaScript.src = "https://assets.bomamarketing.com/public/boma-form-submit.js";
+    document.body.appendChild(bomaScript);
+
+    return () => {
+      if (document.body.contains(recaptchaScript)) document.body.removeChild(recaptchaScript);
+      if (document.body.contains(bomaScript)) document.body.removeChild(bomaScript);
+    };
+  }, []);
+
   return (
-    <div className="rounded-3xl border border-[#6FD7E3]/20 bg-[#6FD7E3]/10 p-8 text-center shadow-2xl shadow-black/20">
-      <h2 className="text-3xl font-semibold text-white">
-        Download the free asset protection guide
+    <div className="rounded-3xl border border-[#6FD7E3]/20 bg-white p-8 text-[#26414f] shadow-2xl shadow-black/20">
+      <h2 className="text-center text-3xl font-semibold text-[#26414f]">
+        Get the free asset protection guide
       </h2>
 
-      <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-white/70">
-        Enter your details on the next page and we’ll send the guide to your inbox. You may also receive occasional related insights from FWP Advisory about asset protection, succession planning, and family wealth strategy. You can unsubscribe at any time.
+      <p className="mx-auto mt-4 max-w-xl text-center text-sm leading-6 text-[#26414f]/80">
+        Enter your details below, and we’ll send the free guide to your inbox. You may also receive occasional related insights from FWP Advisory about asset protection, succession planning, and family wealth strategy. You can unsubscribe at any time.
       </p>
 
-      <div className="mt-8">
-        <a
-          href="https://public2.bomamarketing.com/lp/KBL0fB7V"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center justify-center rounded-full bg-[#6FD7E3] px-8 py-3 text-sm font-semibold text-[#0E1020] shadow-lg shadow-[#6FD7E3]/20 transition hover:-translate-y-0.5 hover:bg-[#8FE3EC]"
-        >
-          Download Free Guide →
-        </a>
-      </div>
+      <form
+        action="https://public2.bomamarketing.com/lp/KBL0fB7V"
+        method="post"
+        className="mt-7 space-y-5"
+      >
+        <div>
+          <label htmlFor="email" className="mb-2 block text-sm font-semibold text-[#26414f]">
+            Email *
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            className="w-full rounded-xl border border-[#26414f]/20 px-4 py-3 text-[#26414f] outline-none focus:border-[#6FD7E3]"
+          />
+        </div>
 
-      <p className="mt-5 text-sm text-white/45">
-        General information only. Not legal or financial advice.
-      </p>
+        <div>
+          <label htmlFor="firstName" className="mb-2 block text-sm font-semibold text-[#26414f]">
+            First name *
+          </label>
+          <input
+            type="text"
+            id="firstName"
+            name="firstName"
+            required
+            className="w-full rounded-xl border border-[#26414f]/20 px-4 py-3 text-[#26414f] outline-none focus:border-[#6FD7E3]"
+          />
+        </div>
+
+        <div className="my-4">
+          <div
+            id="g-recaptcha"
+            className="g-recaptcha"
+            data-sitekey="6Ld2WWQUAAAAAGXM4DhsYHx1glA875PZIjgQpN00"
+            data-theme="light"
+            data-type="image"
+            data-size="normal"
+            data-badge="bottomright"
+            data-tabindex="0"
+            data-callback="allowSubmit"
+            data-expired-callback="denySubmit"
+            data-error-callback="denySubmit"
+          />
+        </div>
+
+        <div className="hidden">
+          <input id="sabr" name="sabr" />
+        </div>
+
+        <div className="text-center">
+          <input
+            type="submit"
+            id="boma-form-submit"
+            value="Submit"
+            disabled
+            className="inline-flex cursor-pointer items-center justify-center rounded-full bg-[#26414f] px-8 py-3 text-sm font-semibold text-white transition hover:bg-[#0E1020] disabled:cursor-not-allowed disabled:opacity-50"
+          />
+        </div>
+      </form>
     </div>
   );
 }
