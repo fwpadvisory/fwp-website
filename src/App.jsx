@@ -632,12 +632,29 @@ function FinalCTA() {
 }
 function BomaLeadForm() {
   return (
-    <div className="overflow-hidden rounded-3xl border border-[#6FD7E3]/20 bg-white shadow-2xl shadow-black/20">
-      <iframe
-        src="https://public2.bomamarketing.com/lp/KBL0fB7V"
-        title="Get the free asset protection guide"
-        className="h-[760px] w-full border-0"
-      />
+    <div className="rounded-3xl border border-[#6FD7E3]/20 bg-[#6FD7E3]/10 p-8 text-center shadow-2xl shadow-black/20">
+      <h2 className="text-3xl font-semibold text-white">
+        Download the free asset protection guide
+      </h2>
+
+      <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-white/70">
+        Enter your details on the next page and we’ll send the guide to your inbox. You may also receive occasional related insights from FWP Advisory about asset protection, succession planning, and family wealth strategy. You can unsubscribe at any time.
+      </p>
+
+      <div className="mt-8">
+        <a
+          href="https://public2.bomamarketing.com/lp/KBL0fB7V"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center justify-center rounded-full bg-[#6FD7E3] px-8 py-3 text-sm font-semibold text-[#0E1020] shadow-lg shadow-[#6FD7E3]/20 transition hover:-translate-y-0.5 hover:bg-[#8FE3EC]"
+        >
+          Download Free Guide →
+        </a>
+      </div>
+
+      <p className="mt-5 text-sm text-white/45">
+        General information only. Not legal or financial advice.
+      </p>
     </div>
   );
 }
