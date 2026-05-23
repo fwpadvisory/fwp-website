@@ -177,14 +177,16 @@ function LeadMagnetSection({ compact = false }) {
           <p className="mt-5 text-base leading-7 text-white/70">{leadMagnet.summary}</p>
         </div>
         <div className="rounded-3xl border border-white/10 bg-[#0E1020]/55 p-6">
-          <h3 className="text-xl font-semibold text-white">Get the guide by email</h3>
-          <p className="mt-3 text-sm leading-6 text-white/60">For people who are interested, but not ready to book a Discovery Meeting yet.</p>
-          <form className="mt-6 grid gap-3 sm:grid-cols-[1fr_1fr_auto]">
-            <input className="rounded-full border border-white/10 bg-[#0E1020]/75 px-4 py-3 text-sm text-white outline-none placeholder:text-white/35 focus:border-[#6FD7E3]" placeholder="First name" />
-            <input className="rounded-full border border-white/10 bg-[#0E1020]/75 px-4 py-3 text-sm text-white outline-none placeholder:text-white/35 focus:border-[#6FD7E3]" placeholder="Email address" />
-            <Button type="submit">Download</Button>
-          </form>
-          <p className="mt-4 text-xs leading-5 text-white/45">Prototype note: in production, this form should connect to your email marketing or CRM system and include privacy consent.</p>
+        <h3 className="text-xl font-semibold text-white">Get the guide by email</h3>
+<p className="mt-3 text-sm leading-6 text-white/60">
+  Interested, but not ready to book a Discovery Meeting yet? Get the free guide first.
+</p>
+<a
+  href="#guide-form"
+  className="mt-6 inline-flex items-center justify-center rounded-full bg-[#6FD7E3] px-8 py-3 text-sm font-semibold text-[#0E1020] shadow-lg shadow-[#6FD7E3]/20 transition hover:-translate-y-0.5 hover:bg-[#8FE3EC]"
+>
+  Download Free Guide →
+</a>
         </div>
       </div>
     </section>
