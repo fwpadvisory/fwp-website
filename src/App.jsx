@@ -49,18 +49,12 @@ const legalPages = [
 
 function LogoMark({ href = "#/" }) {
   return (
-    <a href={href} className="flex shrink-0 items-center gap-3 text-left" aria-label="Go to home page">
-      <div className="relative flex h-11 w-11 items-center justify-center">
-        <svg viewBox="0 0 100 110" className="h-11 w-11" aria-hidden="true">
-          <path d="M50 5 C62 15 78 22 93 23 V53 C93 79 76 98 50 106 C24 98 7 79 7 53 V23 C22 22 38 15 50 5Z" fill="none" stroke={aqua} strokeWidth="10" strokeLinejoin="round" />
-          <path d="M25 34 H48 V45 H25 Z" fill={aqua} />
-          <path d="M50 66 L39 45 H51 L57 58 L70 32 H82 V47 C82 65 69 80 55 89 L50 78 L43 89 C30 80 19 64 19 51 H31 C33 62 38 70 43 75 L50 66Z" fill={aqua} />
-        </svg>
-      </div>
-      <div className="leading-none">
-        <div className="text-base font-light tracking-[0.26em] text-[#6FD7E3] lg:text-lg lg:tracking-[0.32em]">FAMILY WEALTH</div>
-        <div className="mt-1 text-[9px] font-semibold tracking-[0.34em] text-[#8FE3EC] lg:text-[10px] lg:tracking-[0.45em]">PROTECTION ADVISORY</div>
-      </div>
+    <a href={href} className="flex items-center gap-3 text-left" aria-label="Go to home page">
+      <img
+        src="/fwp-logo.png"
+        alt="Family Wealth Protection Advisory"
+        className="h-14 w-auto"
+      />
     </a>
   );
 }
