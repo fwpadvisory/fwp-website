@@ -767,7 +767,7 @@ export default function FWPWebsitePrototype() {
       </div>
 
       <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0E1020]/88 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-8 px-6 py-5 lg:px-8">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3 lg:px-8">
           <LogoMark href="#/home" />
           <nav className="hidden flex-1 items-center justify-center gap-3 text-sm text-white/70 md:flex lg:gap-5 xl:gap-7">
             {pages.map((item) => (
