@@ -631,104 +631,13 @@ function FinalCTA() {
   );
 }
 function BomaLeadForm() {
-  React.useEffect(() => {
-    window.allowSubmit = function () {
-      const submitButton = document.getElementById("boma-form-submit");
-      if (submitButton) submitButton.disabled = false;
-    };
-
-    window.denySubmit = function () {
-      const submitButton = document.getElementById("boma-form-submit");
-      if (submitButton) submitButton.disabled = true;
-    };
-
-    const recaptchaScript = document.createElement("script");
-    recaptchaScript.src = "https://www.google.com/recaptcha/api.js";
-    recaptchaScript.async = true;
-    recaptchaScript.defer = true;
-    document.body.appendChild(recaptchaScript);
-
-    const bomaScript = document.createElement("script");
-    bomaScript.src = "https://assets.bomamarketing.com/public/boma-form-submit.js";
-    document.body.appendChild(bomaScript);
-
-    return () => {
-      if (document.body.contains(recaptchaScript)) document.body.removeChild(recaptchaScript);
-      if (document.body.contains(bomaScript)) document.body.removeChild(bomaScript);
-    };
-  }, []);
-
   return (
-    <div className="rounded-3xl border border-[#6FD7E3]/20 bg-white p-8 text-[#26414f] shadow-2xl shadow-black/20">
-      <h2 className="text-center text-3xl font-semibold text-[#26414f]">
-        Get the free asset protection guide
-      </h2>
-
-      <p className="mx-auto mt-4 max-w-xl text-center text-sm leading-6 text-[#26414f]/80">
-        Enter your details below, and we’ll send the free guide to your inbox. You may also receive occasional related insights from FWP Advisory about asset protection, succession planning, and family wealth strategy. You can unsubscribe at any time.
-      </p>
-
-      <form
-        action="https://public2.bomamarketing.com/lp/KBL0fB7V"
-        method="post"
-        className="mt-7 space-y-5"
-      >
-        <div>
-          <label htmlFor="email" className="mb-2 block text-sm font-semibold text-[#26414f]">
-            Email *
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            required
-            className="w-full rounded-xl border border-[#26414f]/20 px-4 py-3 text-[#26414f] outline-none focus:border-[#6FD7E3]"
-          />
-        </div>
-
-        <div>
-          <label htmlFor="firstName" className="mb-2 block text-sm font-semibold text-[#26414f]">
-            First name *
-          </label>
-          <input
-            type="text"
-            id="firstName"
-            name="firstName"
-            required
-            className="w-full rounded-xl border border-[#26414f]/20 px-4 py-3 text-[#26414f] outline-none focus:border-[#6FD7E3]"
-          />
-        </div>
-
-        <div className="my-4">
-          <div
-            id="g-recaptcha"
-            className="g-recaptcha"
-            data-sitekey="6Ld2WWQUAAAAAGXM4DhsYHx1glA875PZIjgQpN00"
-            data-theme="light"
-            data-type="image"
-            data-size="normal"
-            data-badge="bottomright"
-            data-tabindex="0"
-            data-callback="allowSubmit"
-            data-expired-callback="denySubmit"
-            data-error-callback="denySubmit"
-          />
-        </div>
-
-        <div className="hidden">
-          <input id="sabr" name="sabr" />
-        </div>
-
-        <div className="text-center">
-          <input
-            type="submit"
-            id="boma-form-submit"
-            value="Submit"
-            disabled
-            className="inline-flex cursor-pointer items-center justify-center rounded-full bg-[#26414f] px-8 py-3 text-sm font-semibold text-white transition hover:bg-[#0E1020] disabled:cursor-not-allowed disabled:opacity-50"
-          />
-        </div>
-      </form>
+    <div className="overflow-hidden rounded-3xl border border-[#6FD7E3]/20 bg-white shadow-2xl shadow-black/20">
+      <iframe
+        src="https://public2.bomamarketing.com/lp/KBL0fB7V"
+        title="Get the free asset protection guide"
+        className="h-[760px] w-full border-0"
+      />
     </div>
   );
 }
