@@ -178,7 +178,7 @@ function LeadMagnetSection({ compact = false }) {
         </div>
         <div className="rounded-3xl border border-white/10 bg-[#0E1020]/55 p-6">
        <h3 className="text-xl font-semibold text-white">Get the guide by email</h3>
-<p className="mt-3 text-sm leading-6 text-white/60">
+<p<ScrollToGuideButton className="mt-6" />
   Interested, but not ready to book a Discovery Meeting yet? Get the free guide first.
 </p>
 <button
@@ -632,6 +632,22 @@ function FinalCTA() {
         <div className="mt-9"><BookingButton>Book Your Discovery Meeting <ArrowRight className="ml-2 h-4 w-4" /></BookingButton></div>
       </div>
     </section>
+  );
+}
+function ScrollToGuideButton({ className = "" }) {
+  return (
+    <button
+      type="button"
+      onClick={() => {
+        const form = document.getElementById("guide-form");
+        if (form) {
+          form.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }}
+      className={`inline-flex items-center justify-center rounded-full bg-[#6FD7E3] px-8 py-3 text-sm font-semibold text-[#0E1020] shadow-lg shadow-[#6FD7E3]/20 transition hover:-translate-y-0.5 hover:bg-[#8FE3EC] ${className}`}
+    >
+      Download Free Guide
+    </button>
   );
 }
 function BomaLeadForm() {
