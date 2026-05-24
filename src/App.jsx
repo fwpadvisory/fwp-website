@@ -188,6 +188,8 @@ function LeadMagnetSection({ compact = false }) {
 >
   Download Free Guide
 </button>
+  Download Free Guide
+</button>
         </div>
       </div>
     </section>
@@ -311,7 +313,7 @@ function Hero() {
         <p className="mt-7 max-w-2xl text-lg leading-8 text-white/72">For business owners, families, and asset holders who want clearer structures, reduced exposure, and greater control over how wealth is managed and passed on.</p>
         <div className="mt-9 flex flex-col gap-4 sm:flex-row">
           <BookingButton>Book Your Discovery Meeting <ArrowRight className="ml-2 h-4 w-4" /></BookingButton>
-          <Button variant="secondary" href="#/guide" targetSelf>Download Free Guide</Button>
+          <Button variant="secondary" href="#/guide" targetSelf> Free Guide</Button>
         </div>
         <p className="mt-5 text-sm text-white/50">Ready now? Book a Discovery Meeting. Not ready yet? Start with the free guide.</p>
       </motion.div>
