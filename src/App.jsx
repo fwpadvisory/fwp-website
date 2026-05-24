@@ -188,8 +188,7 @@ function LeadMagnetSection({ compact = false }) {
 >
   Download Free Guide
 </button>
-  Download Free Guide
-</button>
+ 
         </div>
       </div>
     </section>
