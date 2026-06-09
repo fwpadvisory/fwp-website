@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PagePlaceholder from '../../components/PagePlaceholder.astro';
+
+// Individual resource / article pages are driven by Sanity in Phase 3.
+// Returning no paths registers the route without generating any pages yet.
+export function getStaticPaths() {
+  return [];
+}
+---
+
+<BaseLayout title="Resource — FWP Advisory">
+  <PagePlaceholder label="Resource" title="Resource" />
+</BaseLayout>
