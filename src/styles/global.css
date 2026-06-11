@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+/* Brand tokens — defined once, reused everywhere (see brand-guidelines.pdf). */
+@theme {
+  --color-aqua: #6fd7e3;
+  --color-soft-aqua: #8fe3ec;
+  --color-navy: #0e1020;
+  --color-charcoal: #2b2b2b;
+
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-heading: "Montserrat Variable", ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-navy);
+    color: #ffffff;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Brand: Montserrat for headings, Inter for body. Sans-serif only, no italics. */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+  }
+
+  ::selection {
+    background-color: var(--color-aqua);
+    color: var(--color-navy);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-aqua);
+    outline-offset: 2px;
+  }
+}

@@ -1,0 +1,54 @@
+---
+import '@fontsource-variable/inter';
+import '@fontsource-variable/montserrat';
+import '../styles/global.css';
+import Header from '../components/Header.tsx';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = 'Strategy-led asset protection and succession advisory for Australian business owners, families, and asset holders.',
+} = Astro.props;
+
+const bookingUrl = import.meta.env.PUBLIC_BOOKING_URL ?? '';
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
+---
+
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="canonical" href={canonical} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    {/* TODO Phase 5: Open Graph + Twitter tags, JSON-LD (Organization, WebSite, etc.) */}
+    {/* TODO Phase 6: GA4 (PUBLIC_GA4_ID) + Search Console verification (PUBLIC_GSC_VERIFICATION) */}
+  </head>
+  <body class="min-h-screen bg-navy font-sans text-white antialiased">
+    {/* Brand background: soft aqua glow on navy (from prototype). */}
+    <div class="pointer-events-none fixed inset-0 overflow-hidden" aria-hidden="true">
+      <div
+        class="absolute left-1/2 top-0 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-aqua/10 blur-3xl"
+      >
+      </div>
+      <div class="absolute right-0 top-[520px] h-[360px] w-[360px] rounded-full bg-aqua/5 blur-3xl">
+      </div>
+    </div>
+
+    <Header client:load currentPath={Astro.url.pathname} bookingUrl={bookingUrl} />
+
+    <main class="relative z-10">
+      <slot />
+    </main>
+
+    <Footer />
+  </body>
+</html>

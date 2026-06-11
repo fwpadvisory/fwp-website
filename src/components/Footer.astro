@@ -1,0 +1,22 @@
+---
+import { LEGAL_ITEMS, COMPANY } from '../lib/site';
+---
+
+<footer class="relative z-10 border-t border-white/10 px-6 py-10 lg:px-8">
+  <div
+    class="mx-auto flex max-w-7xl flex-col gap-6 text-sm text-white/50 md:flex-row md:items-center md:justify-between"
+  >
+    <div>&copy; {COMPANY.name}. ABN {COMPANY.abn}.</div>
+    <div class="flex flex-wrap gap-5">
+      {
+        LEGAL_ITEMS.map((item) => (
+          <a href={item.href} class="hover:text-white">
+            {item.label}
+          </a>
+        ))
+      }
+      <span>General information only.</span>
+      <span>Not legal or financial advice.</span>
+    </div>
+  </div>
+</footer>
