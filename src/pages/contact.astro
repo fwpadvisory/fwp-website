@@ -1,15 +1,17 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PagePlaceholder from '../components/PagePlaceholder.astro';
+import PageHero from '../components/PageHero.astro';
+import ContactSection from '../components/ContactSection.astro';
 ---
 
 <BaseLayout
   title="Contact — FWP Advisory"
   description="Start with a clear strategy conversation. Book a Discovery Meeting to discuss your situation and current structures."
 >
-  <PagePlaceholder
+  <PageHero
     label="Contact"
     title="Start With a Clear Strategy Conversation"
     body="Book a Discovery Meeting to discuss your situation, your current structures, and whether a strategy paper may be appropriate."
   />
+  <ContactSection />
 </BaseLayout>

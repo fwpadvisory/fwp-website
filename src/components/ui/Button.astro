@@ -1,0 +1,29 @@
+---
+// Pill link button (prototype: Button). Link-only — form submits live in BomaForm.
+// Internal links (start with "/") render in-place; external links open in a new tab.
+interface Props {
+  variant?: 'primary' | 'secondary';
+  href: string;
+  class?: string;
+}
+
+const { variant = 'primary', href, class: extra = '' } = Astro.props;
+
+const base =
+  'inline-flex items-center justify-center whitespace-nowrap rounded-full px-6 py-3 text-sm font-semibold transition-all duration-200';
+const styles =
+  variant === 'secondary'
+    ? 'border border-[#6FD7E3]/40 text-white hover:border-[#6FD7E3] hover:bg-white/5'
+    : 'bg-[#6FD7E3] text-[#0E1020] shadow-lg shadow-[#6FD7E3]/20 hover:-translate-y-0.5 hover:bg-[#8FE3EC]';
+
+const isInternal = href.startsWith('/') || href.startsWith('#');
+---
+
+<a
+  href={href}
+  target={isInternal ? undefined : '_blank'}
+  rel={isInternal ? undefined : 'noopener noreferrer'}
+  class={`${base} ${styles} ${extra}`}
+>
+  <slot />
+</a>

@@ -1,15 +1,46 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PagePlaceholder from '../components/PagePlaceholder.astro';
+import PageHero from '../components/PageHero.astro';
+import BomaForm from '../components/BomaForm.astro';
+import { LEAD_MAGNET } from '../lib/site';
+
+const covers = [
+  'The five key risks to family wealth',
+  'Why documents alone may not be enough',
+  'How family protection trust strategies may form part of the discussion',
+  'Why ownership, control and succession need to be reviewed together',
+  'A simple net equity worksheet to start the conversation',
+];
 ---
 
 <BaseLayout
   title="Free Guide — The Guide to Protecting Family Wealth | FWP Advisory"
   description="Download the free guide to the key risks, structures, succession issues, and control questions that can affect family wealth before pressure appears."
 >
-  <PagePlaceholder
+  <PageHero
     label="Free guide"
-    title="The Guide to Protecting Family Wealth"
+    title={LEAD_MAGNET.title}
     body="Download the free guide if you are interested in asset protection and succession planning, but not ready to book a Discovery Meeting yet."
   />
+
+  <section
+    class="relative z-10 mx-auto grid max-w-7xl gap-8 px-6 pb-24 lg:grid-cols-[0.85fr_1.15fr] lg:px-8"
+  >
+    <div class="rounded-3xl border border-white/10 bg-white/[0.04] p-8 md:p-10">
+      <h2 class="text-3xl font-semibold text-white">What the guide covers</h2>
+      <div class="mt-6 space-y-4 text-white/70">
+        {covers.map((item) => <p>• {item}</p>)}
+      </div>
+    </div>
+    <div class="rounded-3xl border border-[#6FD7E3]/20 bg-[#6FD7E3]/10 p-8 md:p-10">
+      <h2 class="text-3xl font-semibold text-white">Download by email</h2>
+      <p class="mt-4 text-white/70">Enter your details and receive the free guide.</p>
+      <div class="mt-7">
+        <BomaForm layout="stacked" consent submitLabel="Download Free Guide" />
+      </div>
+      <p class="mt-5 text-xs leading-5 text-white/45">
+        General information only. Not legal or financial advice.
+      </p>
+    </div>
+  </section>
 </BaseLayout>

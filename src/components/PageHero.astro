@@ -1,0 +1,31 @@
+---
+import SectionLabel from './ui/SectionLabel.astro';
+import BookingButton from './BookingButton.astro';
+
+// Inner-page hero (prototype: PageHero). `booking` toggles the CTA.
+interface Props {
+  label: string;
+  title: string;
+  body?: string;
+  booking?: boolean;
+}
+
+const { label, title, body, booking = true } = Astro.props;
+---
+
+<section
+  class="animate-fade-up relative z-10 mx-auto max-w-7xl px-6 pb-16 pt-16 lg:px-8 lg:pb-20 lg:pt-24"
+>
+  <SectionLabel>{label}</SectionLabel>
+  <h1 class="max-w-4xl text-5xl font-semibold tracking-tight text-white md:text-7xl">
+    {title}
+  </h1>
+  {body && <p class="mt-7 max-w-3xl text-lg leading-8 text-white/72">{body}</p>}
+  {
+    booking && (
+      <div class="mt-9">
+        <BookingButton />
+      </div>
+    )
+  }
+</section>

@@ -1,15 +1,54 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PagePlaceholder from '../components/PagePlaceholder.astro';
+import PageHero from '../components/PageHero.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+
+const steps = [
+  {
+    n: '1',
+    title: 'Discovery Meeting',
+    text: 'Before we meet, you complete a short survey. In our discovery meeting, we uncover the specific risks to your assets — whether from legal claims, disputes, or unintended outcomes — and clarify exactly what you want to happen.',
+  },
+  {
+    n: '2',
+    title: 'Personalised Strategy Paper',
+    text: 'Based on your situation, a clear, easy-to-read strategy paper is prepared. It explains the risks, recommended pathway, and structures to consider — without legal jargon.',
+  },
+  {
+    n: '3',
+    title: 'Strategy Presentation Meeting',
+    text: 'We walk you through the strategy, answer your questions, and where appropriate, outline the implementation pathway and expected costs. There is no obligation to proceed.',
+  },
+];
 ---
 
 <BaseLayout
   title="Process — FWP Advisory"
   description="A clear process before implementation begins: Discovery Meeting, personalised strategy paper, and strategy presentation meeting."
 >
-  <PagePlaceholder
+  <PageHero
     label="Process"
     title="A Clear Process Before Implementation Begins"
-    body="Understand the risks, receive a written strategy, and decide whether implementation is appropriate for your circumstances."
+    body="The process is designed to help you understand the risks, receive a written strategy, and decide whether implementation is appropriate for your circumstances."
   />
+
+  <section class="relative z-10 mx-auto max-w-5xl px-6 pb-24 lg:px-8">
+    <div class="space-y-6">
+      {
+        steps.map(({ n, title, text }) => (
+          <div class="grid gap-6 rounded-3xl border border-white/10 bg-white/[0.04] p-8 md:grid-cols-[80px_1fr] md:p-10">
+            <div class="flex h-14 w-14 items-center justify-center rounded-full bg-[#6FD7E3] text-lg font-bold text-[#0E1020]">
+              {n}
+            </div>
+            <div>
+              <h2 class="text-2xl font-semibold text-white">{title}</h2>
+              <p class="mt-4 text-lg leading-8 text-white/70">{text}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <FinalCTA />
 </BaseLayout>

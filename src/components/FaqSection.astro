@@ -1,0 +1,31 @@
+---
+import { HelpCircle } from 'lucide-react';
+import SectionLabel from './ui/SectionLabel.astro';
+import { homeFaqs } from '../lib/faqs';
+
+// Prototype: FAQSection. Native <details> — interactive + accessible, zero JS.
+---
+
+<section class="relative z-10 border-y border-white/10 bg-white/[0.025] px-6 py-24 lg:px-8">
+  <div class="mx-auto max-w-5xl">
+    <div class="max-w-3xl">
+      <SectionLabel>Questions</SectionLabel>
+      <h2 class="text-4xl font-semibold tracking-tight text-white md:text-5xl">
+        What people usually want to know before booking.
+      </h2>
+    </div>
+    <div class="mt-10 space-y-4">
+      {
+        homeFaqs.map((faq) => (
+          <details class="group rounded-2xl border border-white/10 bg-white/[0.04] p-6">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-semibold text-white">
+              {faq.q}
+              <HelpCircle className="h-5 w-5 shrink-0 text-[#6FD7E3] transition group-open:rotate-45" />
+            </summary>
+            <p class="mt-4 text-sm leading-6 text-white/65">{faq.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>

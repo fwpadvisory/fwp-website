@@ -20,6 +20,13 @@ export const LEGAL_ITEMS: NavItem[] = [
   { href: '/terms', label: 'Terms of Use' },
 ];
 
+/** Lead magnet (prototype: leadMagnet). */
+export const LEAD_MAGNET = {
+  title: 'The Guide to Protecting Family Wealth',
+  summary:
+    'A practical FWP guide to the key risks, structures, succession issues and control questions that can affect family wealth before pressure appears.',
+} as const;
+
 /** Company facts (from the prototype contact section). */
 export const COMPANY = {
   name: 'Family Wealth Protection Advisory Pty Ltd',

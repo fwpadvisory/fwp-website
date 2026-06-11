@@ -1,0 +1,47 @@
+---
+import { Mail, Phone, MapPin } from 'lucide-react';
+import SectionLabel from './ui/SectionLabel.astro';
+import BookingButton from './BookingButton.astro';
+import { COMPANY } from '../lib/site';
+
+// Prototype: ContactSection (booking + contact details).
+---
+
+<section class="relative z-10 px-6 pb-28 lg:px-8">
+  <div
+    class="mx-auto grid max-w-6xl gap-6 rounded-[2rem] border border-[#6FD7E3]/20 bg-[#6FD7E3]/10 p-8 shadow-2xl shadow-black/20 md:p-10 lg:grid-cols-[1fr_1fr]"
+  >
+    <div class="rounded-[1.5rem] bg-[#0E1020]/60 p-8 md:p-10">
+      <SectionLabel>Start the conversation</SectionLabel>
+      <h2 class="text-4xl font-semibold tracking-tight text-white">
+        Book your Discovery Meeting
+      </h2>
+      <p class="mt-5 text-white/70">
+        The fastest way to start is to book directly into the calendar.
+      </p>
+      <div class="mt-8"><BookingButton /></div>
+    </div>
+    <div class="rounded-[1.5rem] border border-white/10 bg-white/[0.045] p-8 md:p-10">
+      <h3 class="text-2xl font-semibold text-white">{COMPANY.name}</h3>
+      <div class="mt-7 space-y-5">
+        <a
+          href={`mailto:${COMPANY.email}`}
+          class="flex items-center gap-4 rounded-2xl bg-[#0E1020]/60 p-4 text-white/75 transition hover:bg-[#0E1020] hover:text-white"
+        >
+          <Mail className="h-5 w-5 text-[#6FD7E3]" /><span>{COMPANY.email}</span>
+        </a>
+        <a
+          href={COMPANY.phoneHref}
+          class="flex items-center gap-4 rounded-2xl bg-[#0E1020]/60 p-4 text-white/75 transition hover:bg-[#0E1020] hover:text-white"
+        >
+          <Phone className="h-5 w-5 text-[#6FD7E3]" /><span>{COMPANY.phone}</span>
+        </a>
+        <div class="flex items-center gap-4 rounded-2xl bg-[#0E1020]/60 p-4 text-white/75">
+          <MapPin className="h-5 w-5 text-[#6FD7E3]" /><span>{COMPANY.address}</span>
+        </div>
+      </div>
+      <p class="mt-7 text-sm leading-6 text-white/50">ABN: {COMPANY.abn}</p>
+      <p class="mt-3 text-sm leading-6 text-white/50">{COMPANY.compliance}</p>
+    </div>
+  </div>
+</section>

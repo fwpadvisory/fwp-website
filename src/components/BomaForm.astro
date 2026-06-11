@@ -1,0 +1,68 @@
+---
+import { ArrowRight } from 'lucide-react';
+
+/**
+ * Single integration point for BOMA lead capture (the guide-download forms).
+ *
+ * BOMA owns capture + delivery — we never build a custom backend handler. When the
+ * embed code / hosted form URL arrives (Phase 4), render it here (replace the
+ * placeholder block) keyed off `formId`. Until then this is an inert visual
+ * placeholder: the submit is type="button" so nothing posts anywhere.
+ *
+ * TODO BOMA embed — drop the embed into the marked block below.
+ */
+interface Props {
+  layout?: 'inline' | 'stacked';
+  consent?: boolean;
+  submitLabel?: string;
+}
+
+const { layout = 'inline', consent = false, submitLabel = 'Download' } = Astro.props;
+
+const bomaConfigured = false; // flip to true once the BOMA embed is wired (Phase 4)
+const inputClass =
+  'rounded-2xl border border-white/10 bg-[#0E1020]/75 px-4 py-3 text-sm text-white outline-none placeholder:text-white/35 focus:border-[#6FD7E3]';
+const btnClass =
+  'inline-flex items-center justify-center whitespace-nowrap rounded-full bg-[#6FD7E3] px-6 py-3 text-sm font-semibold text-[#0E1020] shadow-lg shadow-[#6FD7E3]/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#8FE3EC]';
+---
+
+{
+  bomaConfigured ? (
+    /* TODO BOMA embed — render BOMA embed/iframe or hosted form here. */
+    <div data-boma-form />
+  ) : layout === 'inline' ? (
+    <div data-boma-form>
+      <div class="grid gap-3 sm:grid-cols-[1fr_1fr_auto]">
+        <input class={inputClass.replace('rounded-2xl', 'rounded-full')} placeholder="First name" aria-label="First name" disabled />
+        <input class={inputClass.replace('rounded-2xl', 'rounded-full')} placeholder="Email address" aria-label="Email address" disabled />
+        <button type="button" class={btnClass}>{submitLabel}</button>
+      </div>
+      <p class="mt-4 text-xs leading-5 text-white/45">
+        Form delivered by BOMA — integration pending (placeholder).
+      </p>
+    </div>
+  ) : (
+    <div data-boma-form>
+      <div class="grid gap-4">
+        <input class={inputClass} placeholder="First name" aria-label="First name" disabled />
+        <input class={inputClass} placeholder="Email address" aria-label="Email address" disabled />
+        {consent && (
+          <label class="flex gap-3 text-sm leading-6 text-white/55">
+            <input type="checkbox" class="mt-1" disabled />
+            <span>
+              I agree to receive the guide and related communications from FWP Advisory. I
+              understand I can unsubscribe later.
+            </span>
+          </label>
+        )}
+        <button type="button" class={btnClass}>
+          {submitLabel}
+          <ArrowRight className="ml-2 h-4 w-4" />
+        </button>
+      </div>
+      <p class="mt-4 text-xs leading-5 text-white/45">
+        Form delivered by BOMA — integration pending (placeholder).
+      </p>
+    </div>
+  )
+}
