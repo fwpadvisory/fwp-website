@@ -24,11 +24,11 @@ export default defineConfig({
       dataset: env.PUBLIC_SANITY_DATASET || 'production',
       apiVersion: env.PUBLIC_SANITY_API_VERSION || '2024-01-01',
       useCdn: false,
-      // studioBasePath: '/studio',  // Phase 3 — embed Sanity Studio at /studio
+      studioBasePath: '/studio', // embedded Sanity Studio
     }),
     sitemap({
-      // Keep gated/noindex legal placeholders out of the sitemap until sign-off.
-      filter: (page) => !/\/(disclaimer|privacy|terms)\/?$/.test(page),
+      // Keep gated/noindex legal placeholders and the /studio admin out of the sitemap.
+      filter: (page) => !/\/(disclaimer|privacy|terms)\/?$/.test(page) && !page.includes('/studio'),
     }),
   ],
   vite: {

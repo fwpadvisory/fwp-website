@@ -77,3 +77,48 @@
     animation: none;
   }
 }
+
+/* Article body — styles for CMS PortableText output (/resources/[slug]). */
+.article-body {
+  color: rgb(255 255 255 / 0.72);
+  font-size: 1.0625rem;
+  line-height: 1.8;
+}
+.article-body > * + * {
+  margin-top: 1.25rem;
+}
+.article-body h2 {
+  color: #fff;
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-top: 2.5rem;
+}
+.article-body h3 {
+  color: #fff;
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-top: 2rem;
+}
+.article-body a {
+  color: var(--color-aqua);
+  text-decoration: underline;
+}
+.article-body ul,
+.article-body ol {
+  padding-left: 1.5rem;
+}
+.article-body ul {
+  list-style: disc;
+}
+.article-body ol {
+  list-style: decimal;
+}
+.article-body blockquote {
+  border-left: 3px solid var(--color-aqua);
+  padding-left: 1.25rem;
+  color: rgb(255 255 255 / 0.85);
+}
+.article-body img {
+  border-radius: 1rem;
+  border: 1px solid rgb(255 255 255 / 0.1);
+}

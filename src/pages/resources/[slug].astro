@@ -1,14 +1,54 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import PagePlaceholder from '../../components/PagePlaceholder.astro';
+import { ArrowLeft } from 'lucide-react';
+import { toHTML } from '@portabletext/to-html';
+import { getArticleCards, getArticleBySlug } from '../../lib/sanity';
+import { articleLd } from '../../lib/seo';
 
-// Individual resource / article pages are driven by Sanity in Phase 3.
-// Returning no paths registers the route without generating any pages yet.
-export function getStaticPaths() {
-  return [];
+// Builds one page per Sanity article. With no real project / no content yet,
+// getArticleCards() returns [] → no pages are generated (and /resources shows stubs).
+export async function getStaticPaths() {
+  const cards = await getArticleCards();
+  const articles = await Promise.all(cards.map((c) => getArticleBySlug(c.slug!)));
+  return articles
+    .filter((a): a is NonNullable<typeof a> => Boolean(a?.slug))
+    .map((a) => ({ params: { slug: a.slug }, props: { article: a } }));
 }
+
+const { article } = Astro.props;
+const bodyHtml = Array.isArray(article.body) ? toHTML(article.body) : '';
 ---
 
-<BaseLayout title="Resource — FWP Advisory">
-  <PagePlaceholder label="Resource" title="Resource" />
+<BaseLayout
+  title={article.seoTitle || `${article.title} — FWP Advisory`}
+  description={article.seoDescription || article.summary || ''}
+  type="article"
+  jsonLd={[articleLd(article, Astro.site)]}
+>
+  <article class="relative z-10 mx-auto max-w-3xl px-6 pb-28 pt-16 lg:px-8 lg:pt-24">
+    <a
+      href="/resources"
+      class="inline-flex items-center text-sm font-semibold text-[#6FD7E3] hover:text-[#8FE3EC]"
+    >
+      <ArrowLeft className="mr-2 h-4 w-4" /> All resources
+    </a>
+
+    {
+      article.category && (
+        <div class="mt-6 inline-flex rounded-full border border-[#6FD7E3]/20 bg-[#6FD7E3]/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#8FE3EC]">
+          {article.category}
+        </div>
+      )
+    }
+    <h1 class="mt-5 text-4xl font-semibold tracking-tight text-white md:text-5xl">
+      {article.title}
+    </h1>
+    {article.summary && <p class="mt-6 text-lg leading-8 text-white/72">{article.summary}</p>}
+    {
+      article.coverImage && (
+        <img src={article.coverImage} alt="" class="mt-8 w-full rounded-3xl border border-white/10" />
+      )
+    }
+    {bodyHtml && <div class="article-body mt-8" set:html={bodyHtml} />}
+  </article>
 </BaseLayout>

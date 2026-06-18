@@ -6,6 +6,7 @@ export const GET: APIRoute = ({ site }) => {
   const sitemap = new URL('sitemap-index.xml', site ?? 'https://fwpadvisory.com.au').href;
   const body = `User-agent: *
 Allow: /
+Disallow: /studio
 
 Sitemap: ${sitemap}
 `;
