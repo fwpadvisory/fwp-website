@@ -4,6 +4,13 @@ import PageHero from '../components/PageHero.astro';
 import SectionLabel from '../components/ui/SectionLabel.astro';
 import Button from '../components/ui/Button.astro';
 import { ArrowRight, MessageSquareText, Mail, FileText, ClipboardCheck, SearchCheck } from 'lucide-react';
+import { getArticleCards } from '../lib/sanity';
+import { ARTICLE_STUBS } from '../lib/articles';
+
+// Articles come from Sanity once a real project has content; until then we show
+// the prototype stubs so the page is complete.
+const fromCms = await getArticleCards();
+const articles = fromCms.length ? fromCms : ARTICLE_STUBS;
 
 const contentTypes = [
   { icon: MessageSquareText, title: 'Short Videos', text: 'Brief, practical videos explaining asset protection, succession, structures, and family wealth risk in plain English.' },
@@ -13,12 +20,6 @@ const contentTypes = [
   { icon: SearchCheck, title: 'Articles', text: 'Occasional written articles for deeper explanation, SEO, and practical education.' },
 ];
 
-// The 3 article stubs (prototype: resources). Wired to Sanity in Phase 3.
-const resources = [
-  { title: 'Why asset protection should be considered before pressure appears', category: 'Asset Protection', summary: 'A practical article on why structures are easier to review before claims, disputes, creditor pressure, or family conflict arise.' },
-  { title: 'Family protection trusts and the importance of ongoing records', category: 'Family Protection Trusts', summary: 'An overview of why trusts and related structures need ongoing administration, accounting records, and regular review.' },
-  { title: 'Succession planning for business owners and blended families', category: 'Succession Planning', summary: 'A discussion of common succession risks where business interests, family expectations, and control issues overlap.' },
-];
 ---
 
 <BaseLayout
@@ -75,19 +76,28 @@ const resources = [
       }
     </div>
 
-    {/* Article stubs */}
+    {/* Articles (from Sanity, or prototype stubs until content exists) */}
     <div class="mt-12 grid gap-6 md:grid-cols-3">
       {
-        resources.map((item) => (
+        articles.map((item) => (
           <article class="rounded-3xl border border-white/10 bg-white/[0.04] p-7">
             <div class="mb-5 inline-flex rounded-full border border-[#6FD7E3]/20 bg-[#6FD7E3]/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#8FE3EC]">
               {item.category}
             </div>
             <h2 class="text-xl font-semibold leading-7 text-white">{item.title}</h2>
             <p class="mt-4 text-sm leading-6 text-white/65">{item.summary}</p>
-            <button class="mt-6 inline-flex items-center text-sm font-semibold text-[#6FD7E3] hover:text-[#8FE3EC]">
-              Resource placeholder <ArrowRight className="ml-2 h-4 w-4" />
-            </button>
+            {item.slug ? (
+              <a
+                href={`/resources/${item.slug}`}
+                class="mt-6 inline-flex items-center text-sm font-semibold text-[#6FD7E3] hover:text-[#8FE3EC]"
+              >
+                Read article <ArrowRight className="ml-2 h-4 w-4" />
+              </a>
+            ) : (
+              <button class="mt-6 inline-flex items-center text-sm font-semibold text-[#6FD7E3] hover:text-[#8FE3EC]">
+                Resource placeholder <ArrowRight className="ml-2 h-4 w-4" />
+              </button>
+            )}
           </article>
         ))
       }

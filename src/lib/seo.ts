@@ -88,3 +88,32 @@ export function breadcrumbLd(pathname: string, site: URL | undefined) {
     })),
   };
 }
+
+/** Article JSON-LD for a single article page. */
+export function articleLd(
+  a: {
+    title: string;
+    slug?: string;
+    summary?: string;
+    seoDescription?: string;
+    publishedAt?: string;
+    coverImage?: string;
+  },
+  site: URL | undefined,
+) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: a.title,
+    description: a.seoDescription || a.summary,
+    ...(a.publishedAt ? { datePublished: a.publishedAt } : {}),
+    ...(a.coverImage ? { image: [a.coverImage] } : {}),
+    author: { '@type': 'Organization', name: COMPANY.name },
+    publisher: {
+      '@type': 'Organization',
+      name: COMPANY.name,
+      logo: { '@type': 'ImageObject', url: abs('/favicon.png', site) },
+    },
+    mainEntityOfPage: abs(`/resources/${a.slug}`, site),
+  };
+}
