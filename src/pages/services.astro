@@ -1,15 +1,109 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PagePlaceholder from '../components/PagePlaceholder.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionLabel from '../components/ui/SectionLabel.astro';
+import { ShieldCheck, Landmark, Network, SearchCheck } from 'lucide-react';
+
+const services = [
+  {
+    icon: ShieldCheck,
+    title: 'Asset Protection Strategy',
+    subtitle: 'Reduce exposure to claims, creditors, and legal risk',
+    body: 'We identify where control, ownership, guarantees, entities, or documentation may create exposure, then design a strategy to reduce avoidable risk.',
+    idealFor: 'Business owners, professionals, investors, and families with assets exposed to commercial or personal risk.',
+    receives: 'A structured asset protection strategy and a clear implementation pathway.',
+  },
+  {
+    icon: Landmark,
+    title: 'Succession Planning',
+    subtitle: 'Control where your assets are intended to go',
+    body: 'We help you clarify who should control, receive, or benefit from your assets, then coordinate the legal steps needed to support that outcome.',
+    idealFor: 'Families, business owners, blended families, and people who want clarity before conflict arises.',
+    receives: 'A succession strategy that documents your intentions and identifies the structures needed to support them.',
+  },
+  {
+    icon: Network,
+    title: 'Trust & Entity Restructuring',
+    subtitle: 'Review structures that may no longer suit your position',
+    body: 'We review existing entities and arrangements to identify gaps, outdated documents, control issues, and potential exposure points.',
+    idealFor: 'People with family trusts, companies, legacy structures, or arrangements created years ago and never properly reviewed.',
+    receives: 'A plain-English review of structural issues and recommended improvements for legal implementation.',
+  },
+  {
+    icon: SearchCheck,
+    title: 'Risk Review & Strategy',
+    subtitle: 'Identify hidden risks before they become problems',
+    body: 'We assess your current position, identify practical risks, and give you a clear strategy before you commit to implementation.',
+    idealFor: 'People who are unsure whether their current arrangements are sufficient or who want a second set of eyes.',
+    receives: 'A clear risk review that sets out what is working, what is exposed, and what should be considered next.',
+  },
+];
+
+const supporting = [
+  { title: 'Accounting & Tax', text: 'Accounting and tax services are available for individuals, businesses, trusts, and entities that need ongoing compliance and practical tax support. This may include work connected to family protection trusts, existing structures, or general client needs.' },
+  { title: 'Bookkeeping', text: 'Bookkeeping services are available for clients who need accurate records, clearer reporting, and reliable financial information. This can support businesses, trusts, entities, and ongoing compliance work.' },
+  { title: 'Business Advisory', text: 'Business advisory support is available for clients who want help understanding performance, cash flow, structure, and practical business decisions. This can be provided as a standalone service or alongside broader strategic work.' },
+  { title: 'Mortgage Broking', text: 'Mortgage broking services are available for clients who need help with lending, refinancing, property finance, or debt structuring. This may be relevant to personal, investment, or business-related finance needs.' },
+  { title: 'Personal Insurance', text: 'Personal insurance services are available for clients who want to review life, disability, income protection, or business continuity risks. This can help protect income, family stability, and business continuity.' },
+  { title: 'Company Secretarial & ASIC Compliance', text: 'Company secretarial and ASIC compliance support is available for companies, family protection trust structures, and business clients. This may include company registers, annual statements, company changes, and director or shareholder updates.' },
+];
 ---
 
 <BaseLayout
   title="Services — FWP Advisory"
   description="How we help you reduce risk and stay in control: asset protection strategy, succession planning, trust and entity restructuring, and risk review."
 >
-  <PagePlaceholder
+  <PageHero
     label="Services"
     title="How We Help You Reduce Risk and Stay in Control"
-    body="We help you identify exposure, document your intentions, and coordinate implementation with specialist legal professionals."
+    body="The right strategy should make your risks, structures, and next steps clear. We help you identify exposure, document your intentions, and coordinate implementation with specialist legal professionals."
   />
+
+  <section class="relative z-10 mx-auto max-w-7xl px-6 pb-24 lg:px-8">
+    <div class="grid gap-6 md:grid-cols-2">
+      {
+        services.map(({ icon: Icon, title, subtitle, body, idealFor, receives }) => (
+          <div class="rounded-3xl border border-white/10 bg-white/[0.04] p-7">
+            <Icon className="mb-5 h-7 w-7 text-[#6FD7E3]" />
+            <h3 class="text-xl font-semibold text-white">{title}</h3>
+            <p class="mt-2 text-sm font-medium text-[#8FE3EC]">{subtitle}</p>
+            <p class="mt-4 text-sm leading-6 text-white/68">{body}</p>
+            <div class="mt-6 space-y-3 border-t border-white/10 pt-5 text-sm leading-6 text-white/62">
+              <p>
+                <span class="font-semibold text-white/85">Best for:</span> {idealFor}
+              </p>
+              <p>
+                <span class="font-semibold text-white/85">You receive:</span> {receives}
+              </p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="mt-10 rounded-3xl border border-[#6FD7E3]/20 bg-[#6FD7E3]/10 p-8">
+      <div class="max-w-3xl">
+        <SectionLabel>Supporting services</SectionLabel>
+        <h3 class="text-2xl font-semibold text-white">Additional services</h3>
+        <p class="mt-4 text-white/70">
+          These services are also available for clients who need practical support with their tax,
+          records, business, finance, or insurance needs.
+        </p>
+      </div>
+
+      <div class="mt-7 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+        {
+          supporting.map(({ title, text }) => (
+            <details class="group rounded-2xl border border-[#6FD7E3]/20 bg-[#0E1020]/45 px-4 py-3 text-sm text-[#8FE3EC] transition hover:border-[#6FD7E3]/45">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-3 font-semibold">
+                {title}
+                <span class="text-[#6FD7E3] transition group-open:rotate-45">+</span>
+              </summary>
+              <p class="mt-3 leading-6 text-white/65">{text}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 </BaseLayout>

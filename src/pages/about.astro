@@ -1,15 +1,68 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PagePlaceholder from '../components/PagePlaceholder.astro';
+import PageHero from '../components/PageHero.astro';
+import CredibilityItem from '../components/CredibilityItem.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+import { Handshake } from 'lucide-react';
 ---
 
 <BaseLayout
   title="About — FWP Advisory"
   description="A strategy-led approach to asset protection and succession. FWP Advisory brings the strategy together before implementation begins."
 >
-  <PagePlaceholder
+  <PageHero
     label="About"
     title="A Strategy-Led Approach to Asset Protection and Succession"
-    body="Most advice is fragmented. FWP Advisory exists to help bring the strategy together before implementation begins."
+    body="Most advice is fragmented — tax, legal, estate planning, insurance, finance, and structures are often handled separately. FWP Advisory exists to help bring the strategy together before implementation begins."
   />
+
+  <section
+    class="relative z-10 mx-auto grid max-w-7xl gap-8 px-6 pb-24 lg:grid-cols-[1fr_0.85fr] lg:px-8"
+  >
+    <div class="rounded-3xl border border-white/10 bg-white/[0.04] p-8 md:p-10">
+      <div class="space-y-6 text-lg leading-8 text-white/70">
+        <p>
+          After decades working across tax, accounting, and financial planning, we have seen a
+          recurring problem: people often have documents, entities, or advice, but no clear strategy
+          connecting them.
+        </p>
+        <p>
+          A trust may exist, but control may not be clear. A will may be in place, but the
+          succession pathway may not match the family reality. A business may be growing, but
+          personal and family assets may still carry avoidable exposure.
+        </p>
+        <p>
+          FWP Advisory was created to address that gap. The focus is not to sell a product or
+          replace your legal adviser. The focus is to help you understand the risks, clarify what you
+          want to happen, and develop a coordinated strategy that can be implemented with the right
+          professionals.
+        </p>
+        <p>
+          With over 25 years in tax and accounting and 15 years in financial planning, we bring a
+          practical understanding of how structures, risk, family intentions, and implementation need
+          to work together.
+        </p>
+      </div>
+    </div>
+    <div class="space-y-6">
+      <div class="rounded-3xl border border-[#6FD7E3]/20 bg-[#6FD7E3]/10 p-8 md:p-10">
+        <Handshake className="mb-6 h-9 w-9 text-[#6FD7E3]" />
+        <h3 class="text-2xl font-semibold text-white">Strategy-led, not product-led.</h3>
+        <p class="mt-4 text-white/70">
+          Our role is to identify the risks, design the strategy, and coordinate the right
+          professionals so implementation is clear and properly managed.
+        </p>
+      </div>
+      <div class="rounded-3xl border border-white/10 bg-white/[0.04] p-8">
+        <h3 class="text-2xl font-semibold text-white">Credentials</h3>
+        <div class="mt-5 grid gap-3">
+          <CredibilityItem>25+ years tax and accounting experience</CredibilityItem>
+          <CredibilityItem>15+ years financial planning experience</CredibilityItem>
+          <CredibilityItem>SAPEPAA-accredited advisor</CredibilityItem>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FinalCTA />
 </BaseLayout>
