@@ -26,7 +26,10 @@ export default defineConfig({
       useCdn: false,
       // studioBasePath: '/studio',  // Phase 3 — embed Sanity Studio at /studio
     }),
-    sitemap(),
+    sitemap({
+      // Keep gated/noindex legal placeholders out of the sitemap until sign-off.
+      filter: (page) => !/\/(disclaimer|privacy|terms)\/?$/.test(page),
+    }),
   ],
   vite: {
     plugins: [tailwindcss()],
