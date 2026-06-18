@@ -4,19 +4,40 @@ import '@fontsource-variable/montserrat';
 import '../styles/global.css';
 import Header from '../components/Header.tsx';
 import Footer from '../components/Footer.astro';
+import { COMPANY } from '../lib/site';
+import { abs, organizationLd, websiteLd, breadcrumbLd } from '../lib/seo';
 
 interface Props {
   title: string;
   description?: string;
+  image?: string;
+  type?: string;
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown>[];
 }
 
 const {
   title,
   description = 'Strategy-led asset protection and succession advisory for Australian business owners, families, and asset holders.',
+  image = '/og-default.png',
+  type = 'website',
+  noindex = false,
+  jsonLd = [],
 } = Astro.props;
 
 const bookingUrl = import.meta.env.PUBLIC_BOOKING_URL ?? '';
+const gscVerification = import.meta.env.PUBLIC_GSC_VERIFICATION ?? '';
+
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
+const ogImage = abs(image, Astro.site);
+
+const breadcrumb = breadcrumbLd(Astro.url.pathname, Astro.site);
+const structuredData = [
+  organizationLd(Astro.site),
+  websiteLd(Astro.site),
+  ...(breadcrumb ? [breadcrumb] : []),
+  ...jsonLd,
+];
 ---
 
 <!doctype html>
@@ -28,9 +49,32 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
     <link rel="canonical" href={canonical} />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex,follow" />}
+    {gscVerification && <meta name="google-site-verification" content={gscVerification} />}
+
+    {/* Open Graph */}
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content={COMPANY.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="en_AU" />
+
+    {/* Twitter */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
     <meta name="generator" content={Astro.generator} />
-    {/* TODO Phase 5: Open Graph + Twitter tags, JSON-LD (Organization, WebSite, etc.) */}
-    {/* TODO Phase 6: GA4 (PUBLIC_GA4_ID) + Search Console verification (PUBLIC_GSC_VERIFICATION) */}
+
+    {
+      structuredData.map((data) => (
+        <script type="application/ld+json" set:html={JSON.stringify(data)} />
+      ))
+    }
+    {/* TODO Phase 6: GA4 (PUBLIC_GA4_ID), deferred. */}
   </head>
   <body class="min-h-screen bg-navy font-sans text-white antialiased">
     {/* Brand background: soft aqua glow on navy (from prototype). */}

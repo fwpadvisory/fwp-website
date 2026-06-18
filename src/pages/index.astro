@@ -7,6 +7,8 @@ import CredibilityItem from '../components/CredibilityItem.astro';
 import LeadMagnet from '../components/LeadMagnet.astro';
 import FaqSection from '../components/FaqSection.astro';
 import FinalCTA from '../components/FinalCTA.astro';
+import { homeFaqs } from '../lib/faqs';
+import { faqPageLd } from '../lib/seo';
 import {
   ShieldCheck,
   ArrowRight,
@@ -70,6 +72,7 @@ const received = [
 <BaseLayout
   title="Family Wealth Protection Advisory — Asset Protection & Succession Strategy"
   description="Strategy-led asset protection and succession advice for business owners, families, and asset holders who want clearer structures, reduced exposure, and greater control."
+  jsonLd={[faqPageLd(homeFaqs)]}
 >
   {/* Hero */}
   <section
