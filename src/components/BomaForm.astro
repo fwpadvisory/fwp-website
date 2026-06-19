@@ -1,68 +1,92 @@
 ---
-import { ArrowRight } from 'lucide-react';
-
 /**
- * Single integration point for BOMA lead capture (the guide-download forms).
+ * BOMA lead-capture form for the free asset-protection guide.
  *
- * BOMA owns capture + delivery — we never build a custom backend handler. When the
- * embed code / hosted form URL arrives (Phase 4), render it here (replace the
- * placeholder block) keyed off `formId`. Until then this is an inert visual
- * placeholder: the submit is type="button" so nothing posts anywhere.
+ * Posts to BOMA's hosted endpoint — we never build a custom backend handler.
+ * reCAPTCHA v2 gates the submit button via BOMA's own script.
  *
- * TODO BOMA embed — drop the embed into the marked block below.
+ * `layout`:
+ *   - "inline"  — compact single-row for the LeadMagnet banner
+ *   - "stacked" — full form for the /guide page
+ *
+ * The second form (contact/consultation) requires domain whitelisting in BOMA
+ * before the embed code is available — placeholder until then.
  */
 interface Props {
   layout?: 'inline' | 'stacked';
   consent?: boolean;
   submitLabel?: string;
+  formType?: 'guide' | 'contact';
 }
 
-const { layout = 'inline', consent = false, submitLabel = 'Download' } = Astro.props;
+const { layout = 'inline', consent = false, submitLabel = 'Download Free Guide', formType = 'guide' } = Astro.props;
 
-const bomaConfigured = false; // flip to true once the BOMA embed is wired (Phase 4)
 const inputClass =
-  'rounded-2xl border border-white/10 bg-[#0E1020]/75 px-4 py-3 text-sm text-white outline-none placeholder:text-white/35 focus:border-[#6FD7E3]';
+  'w-full rounded-2xl border border-white/10 bg-[#0E1020]/75 px-4 py-3 text-sm text-white outline-none placeholder:text-white/35 focus:border-[#6FD7E3] transition-colors';
 const btnClass =
-  'inline-flex items-center justify-center whitespace-nowrap rounded-full bg-[#6FD7E3] px-6 py-3 text-sm font-semibold text-[#0E1020] shadow-lg shadow-[#6FD7E3]/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#8FE3EC]';
+  'inline-flex items-center justify-center whitespace-nowrap rounded-full bg-[#6FD7E3] px-6 py-3 text-sm font-semibold text-[#0E1020] shadow-lg shadow-[#6FD7E3]/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#8FE3EC] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:translate-y-0';
 ---
 
-{
-  bomaConfigured ? (
-    /* TODO BOMA embed — render BOMA embed/iframe or hosted form here. */
-    <div data-boma-form />
-  ) : layout === 'inline' ? (
-    <div data-boma-form>
-      <div class="grid gap-3 sm:grid-cols-[1fr_1fr_auto]">
-        <input class={inputClass.replace('rounded-2xl', 'rounded-full')} placeholder="First name" aria-label="First name" disabled />
-        <input class={inputClass.replace('rounded-2xl', 'rounded-full')} placeholder="Email address" aria-label="Email address" disabled />
-        <button type="button" class={btnClass}>{submitLabel}</button>
-      </div>
-      <p class="mt-4 text-xs leading-5 text-white/45">
-        Form delivered by BOMA — integration pending (placeholder).
-      </p>
+{formType === 'guide' ? (
+  <div data-boma-form>
+    <script is:inline src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script is:inline src="https://assets.bomamarketing.com/public/boma-form-submit.js"></script>
+
+    <form action="https://public2.bomamarketing.com/lp/KBL0fB7V" method="post" data-boma-guide>
+      {layout === 'inline' ? (
+        <div class="grid gap-3 sm:grid-cols-[1fr_1fr_auto]">
+          <input type="text" id="firstName" name="firstName" required placeholder="First name" aria-label="First name" class={inputClass.replace('rounded-2xl', 'rounded-full')} />
+          <input type="email" id="email" name="email" required placeholder="Email address" aria-label="Email address" class={inputClass.replace('rounded-2xl', 'rounded-full')} />
+          <div class="flex flex-col gap-3">
+            <div class="g-recaptcha" data-sitekey="6Ld2WWQUAAAAAGXM4DhsYHx1glA875PZIjgQpN00" data-theme="dark" data-size="compact" data-callback="allowSubmit" data-expired-callback="denySubmit" data-error-callback="denySubmit"></div>
+            <input type="submit" id="boma-form-submit" value={submitLabel} class={btnClass} disabled />
+          </div>
+        </div>
+      ) : (
+        <div class="grid gap-4">
+          <div>
+            <label for="firstName" class="mb-1.5 block text-sm font-medium text-white/80">First name *</label>
+            <input type="text" id="firstName" name="firstName" required placeholder="Your first name" class={inputClass} />
+          </div>
+          <div>
+            <label for="email" class="mb-1.5 block text-sm font-medium text-white/80">Email *</label>
+            <input type="email" id="email" name="email" required placeholder="you@example.com" class={inputClass} />
+          </div>
+          {consent && (
+            <p class="text-xs leading-5 text-white/45">
+              You may also receive occasional related insights from FWP Advisory about asset
+              protection, succession planning, and family wealth strategy. You can unsubscribe
+              at any time.
+            </p>
+          )}
+          <div class="my-2">
+            <div class="g-recaptcha" data-sitekey="6Ld2WWQUAAAAAGXM4DhsYHx1glA875PZIjgQpN00" data-theme="dark" data-size="normal" data-callback="allowSubmit" data-expired-callback="denySubmit" data-error-callback="denySubmit"></div>
+          </div>
+          <div class="invisible"><input class="invisible" id="sabr" name="sabr" /></div>
+          <input type="submit" id="boma-form-submit" value={submitLabel} class={btnClass} disabled />
+        </div>
+      )}
+    </form>
+    <script is:inline>
+      document.querySelectorAll('form[data-boma-guide]').forEach(function(f) {
+        f.addEventListener('submit', function() {
+          if (typeof gtag === 'function') gtag('event', 'guide_form_submit', { event_category: 'conversion' });
+        });
+      });
+    </script>
+  </div>
+) : (
+  /* TODO BOMA contact form — requires domain whitelisting in BOMA Settings first. */
+  <div data-boma-form>
+    <div class="grid gap-4">
+      <input class={inputClass} placeholder="First name" aria-label="First name" disabled />
+      <input class={inputClass} placeholder="Email address" aria-label="Email address" disabled />
+      <button type="button" class={btnClass}>
+        {submitLabel}
+      </button>
     </div>
-  ) : (
-    <div data-boma-form>
-      <div class="grid gap-4">
-        <input class={inputClass} placeholder="First name" aria-label="First name" disabled />
-        <input class={inputClass} placeholder="Email address" aria-label="Email address" disabled />
-        {consent && (
-          <label class="flex gap-3 text-sm leading-6 text-white/55">
-            <input type="checkbox" class="mt-1" disabled />
-            <span>
-              I agree to receive the guide and related communications from FWP Advisory. I
-              understand I can unsubscribe later.
-            </span>
-          </label>
-        )}
-        <button type="button" class={btnClass}>
-          {submitLabel}
-          <ArrowRight className="ml-2 h-4 w-4" />
-        </button>
-      </div>
-      <p class="mt-4 text-xs leading-5 text-white/45">
-        Form delivered by BOMA — integration pending (placeholder).
-      </p>
-    </div>
-  )
-}
+    <p class="mt-4 text-xs leading-5 text-white/45">
+      Contact form pending — BOMA domain whitelisting required.
+    </p>
+  </div>
+)}
