@@ -27,6 +27,7 @@ const {
 
 const bookingUrl = import.meta.env.PUBLIC_BOOKING_URL ?? '';
 const gscVerification = import.meta.env.PUBLIC_GSC_VERIFICATION ?? '';
+const ga4Id = import.meta.env.PUBLIC_GA4_ID ?? '';
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
 const ogImage = abs(image, Astro.site);
@@ -74,7 +75,22 @@ const structuredData = [
         <script type="application/ld+json" set:html={JSON.stringify(data)} />
       ))
     }
-    {/* TODO Phase 6: GA4 (PUBLIC_GA4_ID), deferred. */}
+    {ga4Id && (
+      <Fragment>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`}></script>
+        <script is:inline define:vars={{ ga4Id }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', ga4Id);
+
+          document.addEventListener('click', function(e) {
+            var cta = e.target.closest('[data-booking-cta]');
+            if (cta) gtag('event', 'booking_click', { event_category: 'conversion' });
+          });
+        </script>
+      </Fragment>
+    )}
   </head>
   <body class="min-h-screen bg-navy font-sans text-white antialiased">
     {/* Brand background: soft aqua glow on navy (from prototype). */}
