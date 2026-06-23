@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { LEAD_MAGNET, GUIDE_PDF } from '../lib/site';
+
+// Post-submit landing for the BOMA guide form. BOMA captures + nurtures the lead,
+// then redirects here so the PDF downloads instantly (delivery not dependent on
+// email deliverability). Set this URL as the form's "redirect after submit" in BOMA.
+const btnClass =
+  'inline-flex items-center justify-center whitespace-nowrap rounded-full bg-[#6FD7E3] px-7 py-3.5 text-sm font-semibold text-[#0E1020] shadow-lg shadow-[#6FD7E3]/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#8FE3EC]';
+---
+
+<BaseLayout
+  title="Your guide is ready — FWP Advisory"
+  description="Thank you. Your free Guide to Protecting Family Wealth is ready to download."
+  noindex
+>
+  <PageHero
+    label="Thank you"
+    title="Your guide is ready"
+    body="Thanks for your interest. Download the guide below — we've also sent a copy to your inbox."
+  />
+
+  <section class="relative z-10 mx-auto max-w-3xl px-6 pb-28 lg:px-8">
+    <div class="rounded-3xl border border-[#6FD7E3]/20 bg-[#6FD7E3]/10 p-8 text-center md:p-12">
+      <h2 class="text-2xl font-semibold text-white md:text-3xl">{LEAD_MAGNET.title}</h2>
+      <p class="mx-auto mt-4 max-w-xl text-white/70">{LEAD_MAGNET.summary}</p>
+      <div class="mt-8">
+        <a href={GUIDE_PDF} download class={btnClass} data-guide-download>
+          Download the guide (PDF)
+        </a>
+      </div>
+      <p class="mt-6 text-sm text-white/50">
+        If the download doesn't start,
+        <a href={GUIDE_PDF} class="text-[#6FD7E3] underline" target="_blank" rel="noopener">
+          open it in a new tab</a>.
+      </p>
+    </div>
+
+    <div class="mt-8 rounded-3xl border border-white/10 bg-white/[0.04] p-8 text-center">
+      <p class="text-white/70">
+        Ready to talk through your situation? Book a Discovery Meeting and we'll discuss
+        your structures and whether a strategy paper may be appropriate.
+      </p>
+      <div class="mt-6">
+        <a
+          href={import.meta.env.PUBLIC_BOOKING_URL || '/contact'}
+          target="_blank"
+          rel="noopener noreferrer"
+          class={btnClass}
+          data-booking-cta
+        >
+          Book Your Discovery Meeting
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
