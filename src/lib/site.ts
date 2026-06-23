@@ -27,6 +27,10 @@ export const LEAD_MAGNET = {
     'A practical FWP guide to the key risks, structures, succession issues and control questions that can affect family wealth before pressure appears.',
 } as const;
 
+/** Free guide PDF, hosted statically in /public. Delivered on /thank-you after
+ *  BOMA capture. Swap this file (or path) to update the downloadable guide. */
+export const GUIDE_PDF = '/FWP-Guide-to-Protecting-Family-Wealth.pdf';
+
 /** Company facts (from the prototype contact section). */
 export const COMPANY = {
   name: 'Family Wealth Protection Advisory Pty Ltd',
