@@ -3,9 +3,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import SectionLabel from '../components/ui/SectionLabel.astro';
 import Button from '../components/ui/Button.astro';
-import { ArrowRight, MessageSquareText, Mail, FileText, ClipboardCheck, SearchCheck } from 'lucide-react';
+import { ArrowRight, Download, MessageSquareText, Mail, FileText, ClipboardCheck, SearchCheck } from 'lucide-react';
 import { getArticleCards } from '../lib/sanity';
 import { ARTICLE_STUBS } from '../lib/articles';
+import { BROCHURES } from '../lib/site';
 
 // Articles come from Sanity once a real project has content; until then we show
 // the prototype stubs so the page is complete.
@@ -74,6 +75,36 @@ const contentTypes = [
           </div>
         ))
       }
+    </div>
+
+    {/* Guides & brochures (downloadable PDFs) */}
+    <div class="mt-16">
+      <SectionLabel>Guides & brochures</SectionLabel>
+      <h2 class="mt-2 text-3xl font-semibold tracking-tight text-white md:text-4xl">
+        Free downloadable guides
+      </h2>
+      <p class="mt-4 max-w-2xl text-base leading-7 text-white/70">
+        Plain-English brochures on common tax, super, and business issues. General
+        information only - not legal, tax, or financial advice.
+      </p>
+      <div class="mt-8 grid gap-6 md:grid-cols-3">
+        {
+          BROCHURES.map((b) => (
+            <article class="flex flex-col rounded-3xl border border-white/10 bg-white/[0.04] p-7">
+              <FileText className="mb-5 h-8 w-8 text-[#6FD7E3]" />
+              <h3 class="text-xl font-semibold leading-7 text-white">{b.title}</h3>
+              <p class="mt-4 flex-1 text-sm leading-6 text-white/65">{b.description}</p>
+              <a
+                href={b.file}
+                download
+                class="mt-6 inline-flex items-center text-sm font-semibold text-[#6FD7E3] hover:text-[#8FE3EC]"
+              >
+                <Download className="mr-2 h-4 w-4" /> Download PDF
+              </a>
+            </article>
+          ))
+        }
+      </div>
     </div>
 
     {/* Articles (from Sanity, or prototype stubs until content exists) */}
