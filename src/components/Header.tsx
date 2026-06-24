@@ -10,7 +10,7 @@ function LogoMark() {
     <a
       href="/"
       className="flex shrink-0 items-center gap-3 text-left"
-      aria-label="Family Wealth Protection Advisory — home"
+      aria-label="Family Wealth Protection Advisory - home"
     >
       <div className="relative flex h-11 w-11 items-center justify-center">
         <svg viewBox="0 0 100 110" className="h-11 w-11" aria-hidden="true">
