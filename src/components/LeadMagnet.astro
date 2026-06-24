@@ -1,14 +1,19 @@
 ---
 import SectionLabel from './ui/SectionLabel.astro';
-import BomaForm from './BomaForm.astro';
 import { LEAD_MAGNET } from '../lib/site';
 
 // Prototype: LeadMagnetSection. `compact` controls vertical padding.
+// The actual BOMA capture form lives on /guide (one embed per page - BOMA's
+// embed script uses fixed element IDs, so it can't be rendered twice on a page).
+// Here we link through to it.
 interface Props {
   compact?: boolean;
 }
 
 const { compact = false } = Astro.props;
+
+const btnClass =
+  'inline-flex items-center justify-center whitespace-nowrap rounded-full bg-[#6FD7E3] px-6 py-3 text-sm font-semibold text-[#0E1020] shadow-lg shadow-[#6FD7E3]/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#8FE3EC]';
 ---
 
 <section class={`relative z-10 px-6 ${compact ? 'py-8' : 'py-20'} lg:px-8`}>
@@ -22,13 +27,13 @@ const { compact = false } = Astro.props;
       </h2>
       <p class="mt-5 text-base leading-7 text-white/70">{LEAD_MAGNET.summary}</p>
     </div>
-    <div class="rounded-3xl border border-white/10 bg-[#0E1020]/55 p-6">
+    <div class="flex flex-col justify-center rounded-3xl border border-white/10 bg-[#0E1020]/55 p-6">
       <h3 class="text-xl font-semibold text-white">Get the guide by email</h3>
       <p class="mt-3 text-sm leading-6 text-white/60">
         For people who are interested, but not ready to book a Discovery Meeting yet.
       </p>
       <div class="mt-6">
-        <BomaForm layout="inline" submitLabel="Download" />
+        <a href="/guide" class={btnClass}>Get the free guide</a>
       </div>
     </div>
   </div>

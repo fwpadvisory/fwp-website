@@ -20,7 +20,7 @@ const bodyHtml = Array.isArray(article.body) ? toHTML(article.body) : '';
 ---
 
 <BaseLayout
-  title={article.seoTitle || `${article.title} — FWP Advisory`}
+  title={article.seoTitle || `${article.title} - FWP Advisory`}
   description={article.seoDescription || article.summary || ''}
   type="article"
   jsonLd={[articleLd(article, Astro.site)]}

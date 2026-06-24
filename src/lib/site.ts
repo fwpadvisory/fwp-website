@@ -13,7 +13,7 @@ export const NAV_ITEMS: NavItem[] = [
   { href: '/contact', label: 'Contact' },
 ];
 
-/** Footer legal links (drafts — not for publication until sign-off). */
+/** Footer legal links (drafts - not for publication until sign-off). */
 export const LEGAL_ITEMS: NavItem[] = [
   { href: '/disclaimer', label: 'Disclaimer' },
   { href: '/privacy', label: 'Privacy Policy' },
