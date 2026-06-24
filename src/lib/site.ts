@@ -31,6 +31,36 @@ export const LEAD_MAGNET = {
  *  BOMA capture. Swap this file (or path) to update the downloadable guide. */
 export const GUIDE_PDF = '/FWP-Guide-to-Protecting-Family-Wealth.pdf';
 
+/** Downloadable brochures shown on /resources. Files live in /public.
+ *  (Client-provided collateral; can move to the Sanity `resource` type later
+ *  for self-service editing.) */
+export interface Brochure {
+  title: string;
+  description: string;
+  file: string;
+}
+
+export const BROCHURES: Brochure[] = [
+  {
+    title: 'TPAR without the tax yawn',
+    description:
+      'If you pay contractors, the ATO may want a Taxable Payments Annual Report. Who needs to lodge, what to report, and the 28 August deadline.',
+    file: '/FWP-TPAR-Guide.pdf',
+  },
+  {
+    title: 'Super Changes Without the Snooze',
+    description:
+      "What's changing in superannuation, when, and why it matters - the $3m+ balance alert, payday super, the LISTO boost, and compensation pathways.",
+    file: '/FWP-Super-Changes-Guide.pdf',
+  },
+  {
+    title: 'Employee or Contractor?',
+    description:
+      'A simple guide for business owners. Getting worker arrangements right helps avoid unpaid tax, super, penalties, and messy disputes.',
+    file: '/FWP-Employee-or-Contractor-Guide.pdf',
+  },
+];
+
 /** Company facts (from the prototype contact section). */
 export const COMPANY = {
   name: 'Family Wealth Protection Advisory Pty Ltd',
