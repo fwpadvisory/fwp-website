@@ -3,8 +3,6 @@ import { Menu, X } from 'lucide-react';
 import { NAV_ITEMS } from '../lib/site';
 import { BookingButton } from './BookingButton';
 
-const aqua = '#6FD7E3';
-
 function LogoMark() {
   return (
     <a
@@ -12,22 +10,8 @@ function LogoMark() {
       className="flex shrink-0 items-center gap-3 text-left"
       aria-label="Family Wealth Protection Advisory - home"
     >
-      <div className="relative flex h-11 w-11 items-center justify-center">
-        <svg viewBox="0 0 100 110" className="h-11 w-11" aria-hidden="true">
-          <path
-            d="M50 5 C62 15 78 22 93 23 V53 C93 79 76 98 50 106 C24 98 7 79 7 53 V23 C22 22 38 15 50 5Z"
-            fill="none"
-            stroke={aqua}
-            strokeWidth="10"
-            strokeLinejoin="round"
-          />
-          <path d="M25 34 H48 V45 H25 Z" fill={aqua} />
-          <path
-            d="M50 66 L39 45 H51 L57 58 L70 32 H82 V47 C82 65 69 80 55 89 L50 78 L43 89 C30 80 19 64 19 51 H31 C33 62 38 70 43 75 L50 66Z"
-            fill={aqua}
-          />
-        </svg>
-      </div>
+      <img src="/fwp-shield.png" alt="" className="h-11 w-auto shrink-0" />
+
       <div className="leading-none">
         <div className="text-base font-light tracking-[0.26em] text-[#6FD7E3] lg:text-lg lg:tracking-[0.32em]">
           FAMILY WEALTH
