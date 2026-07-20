@@ -46,6 +46,33 @@ const scenarios = [
   { icon: SearchCheck, title: 'Second opinion on your current plan', text: 'You already have documents or structures, but you are not sure they still work together or reflect your current wishes.' },
 ];
 
+const realScenarios = [
+  {
+    title: 'The 26-Year Estate Dispute - and Counting',
+    body: 'A family navigating a grandmother’s multimillion-dollar estate faced a poorly structured will. The resulting legal battle continued for 26 years, consumed approximately $1 million in legal fees and caused lasting conflict across generations.',
+    label: 'The lesson:',
+    note: 'Early planning and properly structured arrangements may reduce the grounds for future disputes and help preserve family wealth and relationships.',
+  },
+  {
+    title: 'Insulating Family Property',
+    body: 'A property owner entered a de facto relationship owning a residential unit. When the relationship ended after three years, the property became exposed to a potential family-law claim.',
+    label: 'The lesson:',
+    note: 'Ownership and protection strategies should be considered before a relationship or dispute creates an immediate risk.',
+  },
+  {
+    title: 'Preserving Legacies and Pensions',
+    body: 'A widow and her stepson faced conflict over the distribution of family assets. The proposed inheritance also risked affecting the widow’s age-pension position.',
+    label: 'The outcome:',
+    note: 'A tailored Family Protection Trust helped separate the stepson’s inheritance, resolve the family’s concerns and preserve the widow’s pension position.',
+  },
+  {
+    title: 'Cross-Border Income Isolation',
+    body: 'A talented young Australian athlete preparing for a US college sporting pathway faced future international income, taxation and liability considerations.',
+    label: 'The outcome:',
+    note: 'A private wealth-holding structure was developed to separate and protect his future overseas earnings while supporting his international career.',
+  },
+];
+
 const risks = [
   { icon: Scale, title: 'Lawsuits and legal claims' },
   { icon: Building2, title: 'Business risks and creditors' },
@@ -75,13 +102,23 @@ const received = [
   jsonLd={[faqPageLd(homeFaqs)]}
 >
   {/* Hero */}
-  <section
-    class="relative z-10 mx-auto grid max-w-7xl items-center gap-12 px-6 pb-24 pt-16 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:pb-32 lg:pt-24"
-  >
+  <section class="relative z-10 overflow-hidden">
+    <div class="absolute inset-0" aria-hidden="true">
+      <img
+        src="/images/hero-bronze-stairway.jpg"
+        alt=""
+        class="h-full w-full object-cover object-right"
+      />
+      <div class="absolute inset-0 bg-[#0E1020]/72"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-[#0E1020] via-[#0E1020]/70 to-transparent"></div>
+    </div>
+    <div
+      class="relative mx-auto grid max-w-7xl items-center gap-12 px-6 pb-24 pt-16 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:pb-32 lg:pt-24"
+    >
     <div class="animate-fade-up-slow">
       <SectionLabel>Asset protection &amp; succession strategy</SectionLabel>
       <h1 class="max-w-4xl text-5xl font-semibold tracking-tight text-white md:text-7xl">
-        These days, getting sued is common. Losing what you built shouldn't be.
+        Getting sued is common. Losing what you built shouldn't be.
       </h1>
       <p class="mt-7 max-w-2xl text-lg leading-8 text-white/72">
         That means the things you own and worked hard for can be ripped away. Build a protective
@@ -126,6 +163,7 @@ const received = [
           </p>
         </div>
       </div>
+    </div>
     </div>
   </section>
 
@@ -181,6 +219,39 @@ const received = [
             </div>
           ))
         }
+      </div>
+    </div>
+  </section>
+
+  {/* Real Scenarios */}
+  <section class="relative z-10 px-6 py-16 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="max-w-3xl">
+        <SectionLabel>Real scenarios. Real stakes.</SectionLabel>
+        <h2 class="text-4xl font-semibold tracking-tight text-white md:text-5xl">
+          Asset protection isn't about paperwork. It is about preventing these devastating outcomes.
+        </h2>
+      </div>
+      <div class="mt-12 grid gap-6 md:grid-cols-2">
+        {
+          realScenarios.map(({ title, body, label, note }) => (
+            <article class="flex flex-col rounded-3xl border border-white/10 bg-white/[0.04] p-8">
+              <h3 class="text-xl font-semibold leading-7 text-white">{title}</h3>
+              <p class="mt-4 text-sm leading-6 text-white/68">{body}</p>
+              <div class="mt-6 rounded-2xl border border-[#6FD7E3]/20 bg-[#6FD7E3]/10 p-5">
+                <p class="text-sm leading-6 text-white/80">
+                  <span class="font-semibold text-[#8FE3EC]">{label}</span> {note}
+                </p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+      <div class="mt-10 flex flex-col items-start gap-5 rounded-3xl border border-[#6FD7E3]/20 bg-[#6FD7E3]/10 p-8 sm:flex-row sm:items-center sm:justify-between">
+        <p class="text-xl font-medium text-white">
+          Don't leave your family's financial future to chance.
+        </p>
+        <BookingButton />
       </div>
     </div>
   </section>
