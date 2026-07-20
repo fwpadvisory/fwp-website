@@ -3,27 +3,65 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { ArrowLeft } from 'lucide-react';
 import { toHTML } from '@portabletext/to-html';
 import { getArticleCards, getArticleBySlug } from '../../lib/sanity';
+import { APPROVED_ARTICLES, renderArticleBlocks } from '../../lib/articles';
 import { articleLd } from '../../lib/seo';
 
-// Builds one page per Sanity article. With no real project / no content yet,
-// getArticleCards() returns [] → no pages are generated (and /resources shows stubs).
+// One page per article: published Sanity articles (client-managed) first, then the
+// approved static articles for any slug the CMS doesn't already provide.
 export async function getStaticPaths() {
   const cards = await getArticleCards();
-  const articles = await Promise.all(cards.map((c) => getArticleBySlug(c.slug!)));
-  return articles
-    .filter((a): a is NonNullable<typeof a> => Boolean(a?.slug))
-    .map((a) => ({ params: { slug: a.slug }, props: { article: a } }));
+  const cmsArticles = (await Promise.all(cards.map((c) => getArticleBySlug(c.slug!)))).filter(
+    (a): a is NonNullable<typeof a> => Boolean(a?.slug)
+  );
+
+  const cmsPaths = cmsArticles.map((a) => ({
+    params: { slug: a.slug },
+    props: {
+      article: {
+        title: a.title,
+        slug: a.slug,
+        summary: a.summary,
+        image: a.coverImage,
+        bodyHtml: Array.isArray(a.body) ? toHTML(a.body) : '',
+        disclaimer: (a as { disclaimer?: string }).disclaimer ?? '',
+        sourceNote: (a as { sourceNote?: string }).sourceNote ?? '',
+        seoTitle: a.seoTitle,
+        seoDescription: a.seoDescription,
+        publishedAt: a.publishedAt,
+      },
+    },
+  }));
+
+  const cmsSlugs = new Set(cmsArticles.map((a) => a.slug));
+  const staticPaths = APPROVED_ARTICLES.filter((a) => !cmsSlugs.has(a.slug)).map((a) => ({
+    params: { slug: a.slug },
+    props: {
+      article: {
+        title: a.title,
+        slug: a.slug,
+        summary: a.summary,
+        image: a.image,
+        bodyHtml: renderArticleBlocks(a.body),
+        disclaimer: a.disclaimer,
+        sourceNote: a.sourceNote,
+        seoTitle: undefined,
+        seoDescription: a.summary,
+        publishedAt: a.publishedAt,
+      },
+    },
+  }));
+
+  return [...cmsPaths, ...staticPaths];
 }
 
 const { article } = Astro.props;
-const bodyHtml = Array.isArray(article.body) ? toHTML(article.body) : '';
 ---
 
 <BaseLayout
   title={article.seoTitle || `${article.title} - FWP Advisory`}
   description={article.seoDescription || article.summary || ''}
   type="article"
-  jsonLd={[articleLd(article, Astro.site)]}
+  jsonLd={[articleLd({ ...article, coverImage: article.image }, Astro.site)]}
 >
   <article class="relative z-10 mx-auto max-w-3xl px-6 pb-28 pt-16 lg:px-8 lg:pt-24">
     <a
@@ -33,22 +71,34 @@ const bodyHtml = Array.isArray(article.body) ? toHTML(article.body) : '';
       <ArrowLeft className="mr-2 h-4 w-4" /> All resources
     </a>
 
-    {
-      article.category && (
-        <div class="mt-6 inline-flex rounded-full border border-[#6FD7E3]/20 bg-[#6FD7E3]/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#8FE3EC]">
-          {article.category}
-        </div>
-      )
-    }
-    <h1 class="mt-5 text-4xl font-semibold tracking-tight text-white md:text-5xl">
+    <h1 class="mt-6 text-4xl font-semibold tracking-tight text-white md:text-5xl">
       {article.title}
     </h1>
     {article.summary && <p class="mt-6 text-lg leading-8 text-white/72">{article.summary}</p>}
     {
-      article.coverImage && (
-        <img src={article.coverImage} alt="" class="mt-8 w-full rounded-3xl border border-white/10" />
+      article.image && (
+        <img
+          src={article.image}
+          alt=""
+          class="mt-8 aspect-[16/9] w-full rounded-3xl border border-white/10 object-cover"
+        />
       )
     }
-    {bodyHtml && <div class="article-body mt-8" set:html={bodyHtml} />}
+    {article.bodyHtml && <div class="article-body mt-10" set:html={article.bodyHtml} />}
+
+    {
+      article.disclaimer && (
+        <p class="mt-12 rounded-2xl border border-white/10 bg-white/[0.04] p-5 text-sm leading-6 text-white/55">
+          {article.disclaimer}
+        </p>
+      )
+    }
+    {
+      article.sourceNote && (
+        <p class="mt-4 text-xs leading-6 text-white/40">
+          <span class="font-semibold text-white/60">Source note:</span> {article.sourceNote}
+        </p>
+      )
+    }
   </article>
 </BaseLayout>
