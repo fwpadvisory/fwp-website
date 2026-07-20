@@ -15,9 +15,9 @@ export const NAV_ITEMS: NavItem[] = [
 
 /** Footer legal links (drafts - not for publication until sign-off). */
 export const LEGAL_ITEMS: NavItem[] = [
-  { href: '/disclaimer', label: 'Disclaimer' },
   { href: '/privacy', label: 'Privacy Policy' },
-  { href: '/terms', label: 'Terms of Use' },
+  { href: '/disclaimer', label: 'General Information Disclaimer' },
+  { href: '/terms', label: 'Website Terms of Use' },
 ];
 
 /** Lead magnet (prototype: leadMagnet). */
