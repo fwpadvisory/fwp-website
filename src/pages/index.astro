@@ -38,12 +38,12 @@ const audience = [
 ];
 
 const scenarios = [
-  { icon: Briefcase, title: 'Business owner exposure', text: 'You own or operate a business and want to reduce the chance that business risks flow through to personal or family assets.' },
-  { icon: Layers, title: 'Old trust or company structures', text: 'You have entities that were set up years ago and may no longer reflect your family, asset position, or control objectives.' },
-  { icon: HeartHandshake, title: 'Blended family succession', text: 'You want to provide for people fairly while reducing the chance of confusion, conflict, or unintended asset movement.' },
-  { icon: Users, title: 'Children and inheritance protection', text: 'You want wealth passed on in a controlled way, rather than exposed to relationship breakdowns, poor decisions, or outside claims.' },
-  { icon: Scale, title: 'Claims, creditors, or dispute risk', text: 'You are concerned that assets could become exposed through litigation, guarantees, business pressure, or family conflict.' },
-  { icon: SearchCheck, title: 'Second opinion on your current plan', text: 'You already have documents or structures, but you are not sure they still work together or reflect your current wishes.' },
+  { icon: Briefcase, title: 'Business owner exposure', image: '/images/cards/sit-business-owner.jpg', text: 'You own or operate a business and want to reduce the chance that business risks flow through to personal or family assets.' },
+  { icon: Layers, title: 'Old trust or company structures', image: '/images/cards/sit-old-structures.jpg', text: 'You have entities that were set up years ago and may no longer reflect your family, asset position, or control objectives.' },
+  { icon: HeartHandshake, title: 'Blended family succession', image: '/images/cards/sit-blended-family.jpg', text: 'You want to provide for people fairly while reducing the chance of confusion, conflict, or unintended asset movement.' },
+  { icon: Users, title: 'Children and inheritance protection', image: '/images/cards/sit-inheritance.jpg', text: 'You want wealth passed on in a controlled way, rather than exposed to relationship breakdowns, poor decisions, or outside claims.' },
+  { icon: Scale, title: 'Claims, creditors, or dispute risk', image: '/images/cards/sit-claims.jpg', text: 'You are concerned that assets could become exposed through litigation, guarantees, business pressure, or family conflict.' },
+  { icon: SearchCheck, title: 'Second opinion on your current plan', image: '/images/cards/sit-second-opinion.jpg', text: 'You already have documents or structures, but you are not sure they still work together or reflect your current wishes.' },
 ];
 
 const realScenarios = [
@@ -216,11 +216,17 @@ const received = [
       </div>
       <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {
-          scenarios.map(({ icon: Icon, title, text }) => (
-            <div class="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
-              <Icon className="mb-5 h-7 w-7 text-[#6FD7E3]" />
-              <h3 class="text-lg font-semibold text-white">{title}</h3>
-              <p class="mt-3 text-sm leading-6 text-white/65">{text}</p>
+          scenarios.map(({ icon: Icon, title, image, text }) => (
+            <div class="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04]">
+              <div class="relative h-28">
+                <img src={image} alt="" loading="lazy" class="h-full w-full object-cover" />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0E1020] via-[#0E1020]/50 to-transparent" />
+              </div>
+              <div class="p-6">
+                <Icon className="mb-5 h-7 w-7 text-[#6FD7E3]" />
+                <h3 class="text-lg font-semibold text-white">{title}</h3>
+                <p class="mt-3 text-sm leading-6 text-white/65">{text}</p>
+              </div>
             </div>
           ))
         }
