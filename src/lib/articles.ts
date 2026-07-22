@@ -5,6 +5,18 @@ export interface ArticleCard {
   slug?: string;
   image?: string;
   publishedAt?: string;
+  author?: string;
+}
+
+/** Byline used when an article has no explicit author set in the CMS. */
+export const DEFAULT_ARTICLE_AUTHOR = 'Family Wealth Protection Advisory';
+
+/** "2026-07-15T09:00:00Z" -> "15 July 2026". Returns '' for missing/invalid dates. */
+export function formatArticleDate(iso?: string): string {
+  if (!iso) return '';
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return '';
+  return d.toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' });
 }
 
 export type ArticleBlock = { h: string } | { p: string } | { ul: string[] };
@@ -152,6 +164,18 @@ export const APPROVED_ARTICLES: StaticArticle[] = [
       'This article refers to Ioppolo & Hesford v Conti [2013] WASC 389. The outcome depended on the SMSF deed, the status of the deceased member’s nomination and the particular control arrangements.',
   },
 ];
+
+/**
+ * Featured-image fallback by slug. The three migrated articles live in Sanity but
+ * their `coverImage` is empty (assets weren't uploaded with the content), so we fall
+ * back to the brand image shipped in /public. As soon as an editor uploads a featured
+ * image in the Studio, the CMS image wins.
+ */
+export const ARTICLE_IMAGE_FALLBACK: Record<string, string> = {
+  'trust-not-personal-bank-account': '/images/articles/trust-control.jpg',
+  'does-a-family-trust-protect-your-assets': '/images/articles/family-trust.jpg',
+  'when-your-will-and-superannuation-differ': '/images/articles/will-super.jpg',
+};
 
 /** Card view of the approved articles for the Resources list. */
 export const APPROVED_ARTICLE_CARDS: ArticleCard[] = APPROVED_ARTICLES.map((a) => ({

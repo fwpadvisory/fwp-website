@@ -18,8 +18,16 @@ const btnClass =
 
 <section class={`relative z-10 px-6 ${compact ? 'py-8' : 'py-20'} lg:px-8`}>
   <div
-    class="mx-auto grid max-w-7xl gap-8 rounded-[2rem] border border-[#6FD7E3]/20 bg-[#6FD7E3]/10 p-8 md:p-10 lg:grid-cols-[0.95fr_1.05fr]"
+    class="relative mx-auto grid max-w-7xl gap-8 overflow-hidden rounded-[2rem] border border-[#6FD7E3]/20 p-8 md:p-10 lg:grid-cols-[0.95fr_1.05fr]"
   >
+    <div class="absolute inset-0 -z-10" aria-hidden="true">
+      <img src="/images/section-gold.jpg" alt="" class="h-full w-full object-cover" />
+      <div class="absolute inset-0 bg-[#0E1020]/70"></div>
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-[#0E1020]/95 via-[#0E1020]/70 to-transparent"
+      >
+      </div>
+    </div>
     <div>
       <SectionLabel>Free guide</SectionLabel>
       <h2 class="text-3xl font-semibold tracking-tight text-white md:text-4xl">

@@ -1,0 +1,9 @@
+# Internal working material — not needed for the build, kept out of deployments.
+# (Optimised derivatives that the site actually serves live in /public.)
+VISUAL ASSETS/
+TEXTS ASSETS/
+reference/
+CLAUDE.md
+ROADMAP.md
+FILES-NEEDED.md
+.claude/

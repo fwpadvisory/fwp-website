@@ -26,6 +26,12 @@ export default defineType({
     }),
     defineField({ name: 'excerpt', title: 'Excerpt / summary', type: 'text', rows: 3 }),
     defineField({
+      name: 'author',
+      title: 'Author',
+      type: 'string',
+      description: 'Shown in the byline under the article. Defaults to the firm name if left blank.',
+    }),
+    defineField({
       name: 'body',
       type: 'array',
       of: [{ type: 'block' }, { type: 'image', options: { hotspot: true } }],

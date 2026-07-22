@@ -24,11 +24,13 @@ export interface ArticleFull extends ArticleCard {
 
 const CARDS_QUERY = `*[_type == "article" && defined(slug.current)] | order(publishedAt desc){
   title, "slug": slug.current, category, "summary": excerpt, publishedAt,
+  author,
   "image": coverImage.asset->url
 }`;
 
 const BY_SLUG_QUERY = `*[_type == "article" && slug.current == $slug][0]{
   title, "slug": slug.current, category, "summary": excerpt, excerpt, body, publishedAt,
+  author,
   disclaimer, sourceNote, seoTitle, seoDescription, "coverImage": coverImage.asset->url
 }`;
 

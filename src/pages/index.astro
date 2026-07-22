@@ -81,17 +81,17 @@ const risks = [
 ];
 
 const processSteps = [
-  { n: '1', title: 'Discovery Meeting', text: 'You complete a short survey, then we identify where your assets may be exposed and what you want to happen.' },
-  { n: '2', title: 'Personalised Strategy Paper', text: 'You receive a clear strategy paper that explains the recommended pathway in plain English.' },
-  { n: '3', title: 'Strategy Presentation Meeting', text: 'You review the strategy, ask questions, and decide whether to proceed with implementation.' },
+  { n: '1', title: 'Discovery Meeting', text: 'We complete your Family Wealth Protection Assessment, then you receive a free, personalised Asset Protection Gap Report.' },
+  { n: '2', title: 'Asset Protection Blueprint', text: 'Your Gap Report findings are developed into a personalised Blueprint of recommended structures and actions.' },
+  { n: '3', title: 'Blueprint Implementation', text: 'You are walked through the Blueprint, then the work to put it in place is coordinated if you choose to proceed.' },
 ];
 
 const received = [
-  'Discovery Meeting and risk discussion',
-  'Review of your current structures and intentions',
-  'Personalised Strategy Paper in plain English',
-  'Strategy Presentation Meeting',
-  'Fixed-fee implementation pathway where appropriate',
+  'Family Wealth Protection Assessment',
+  'Free, personalised Asset Protection Gap Report',
+  'Personalised Asset Protection Blueprint',
+  'Walkthrough of your Blueprint and implementation costs',
+  'Step 2 fee credited towards implementation',
   'Coordination with specialist legal professionals',
 ];
 ---
@@ -107,10 +107,15 @@ const received = [
       <img
         src="/images/hero-bronze-stairway.jpg"
         alt=""
-        class="h-full w-full object-cover object-right"
+        class="h-full w-full object-cover object-right [filter:saturate(1.28)_contrast(1.06)_brightness(1.3)]"
       />
-      <div class="absolute inset-0 bg-[#0E1020]/72"></div>
-      <div class="absolute inset-0 bg-gradient-to-r from-[#0E1020] via-[#0E1020]/70 to-transparent"></div>
+      {/* Light navy wash keeps the bronze warm; the gradient darkens only the left
+          so the headline stays legible. */}
+      <div class="absolute inset-0 bg-[#0E1020]/26"></div>
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-[#0E1020] from-15% via-[#0E1020]/80 via-55% to-transparent"
+      >
+      </div>
     </div>
     <div
       class="relative mx-auto grid max-w-7xl items-center gap-12 px-6 pb-24 pt-16 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:pb-32 lg:pt-24"
@@ -257,7 +262,15 @@ const received = [
   </section>
 
   {/* Risks */}
-  <section class="relative z-10 border-y border-white/10 bg-white/[0.025] px-6 py-24 lg:px-8">
+  <section class="relative z-10 overflow-hidden border-y border-white/10 px-6 py-24 lg:px-8">
+    <div class="absolute inset-0 -z-10" aria-hidden="true">
+      <img src="/images/section-violet.jpg" alt="" class="h-full w-full object-cover object-right" />
+      <div class="absolute inset-0 bg-[#0E1020]/72"></div>
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-[#0E1020] from-10% via-[#0E1020]/78 via-55% to-transparent"
+      >
+      </div>
+    </div>
     <div class="mx-auto max-w-7xl">
       <div class="max-w-3xl">
         <h2 class="text-4xl font-semibold tracking-tight text-white md:text-5xl">
@@ -289,9 +302,18 @@ const received = [
   </section>
 
   {/* Your guide */}
-  <section
-    class="relative z-10 mx-auto grid max-w-7xl gap-12 px-6 py-24 lg:grid-cols-[0.85fr_1.15fr] lg:px-8"
-  >
+  <section class="relative z-10 overflow-hidden px-6 py-24 lg:px-8">
+    <div class="absolute inset-0 -z-10" aria-hidden="true">
+      <img src="/images/section-emerald.jpg" alt="" class="h-full w-full object-cover object-left" />
+      <div class="absolute inset-0 bg-[#0E1020]/74"></div>
+      <div
+        class="absolute inset-0 bg-gradient-to-l from-[#0E1020] from-10% via-[#0E1020]/78 via-55% to-transparent"
+      >
+      </div>
+    </div>
+    <div
+      class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.85fr_1.15fr]"
+    >
     <div>
       <SectionLabel>Your guide</SectionLabel>
       <h2 class="text-4xl font-semibold tracking-tight text-white md:text-5xl">
@@ -312,6 +334,7 @@ const received = [
         <CredibilityItem>15+ years financial planning experience</CredibilityItem>
         <CredibilityItem>SAPEPAA-accredited advisor</CredibilityItem>
       </div>
+    </div>
     </div>
   </section>
 

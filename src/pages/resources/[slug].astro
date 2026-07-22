@@ -3,7 +3,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { ArrowLeft } from 'lucide-react';
 import { toHTML } from '@portabletext/to-html';
 import { getArticleCards, getArticleBySlug } from '../../lib/sanity';
-import { APPROVED_ARTICLES, renderArticleBlocks } from '../../lib/articles';
+import {
+  APPROVED_ARTICLES,
+  ARTICLE_IMAGE_FALLBACK,
+  DEFAULT_ARTICLE_AUTHOR,
+  formatArticleDate,
+  renderArticleBlocks,
+} from '../../lib/articles';
 import { articleLd } from '../../lib/seo';
 
 // One page per article: published Sanity articles (client-managed) first, then the
@@ -21,13 +27,14 @@ export async function getStaticPaths() {
         title: a.title,
         slug: a.slug,
         summary: a.summary,
-        image: a.coverImage,
+        image: a.coverImage ?? ARTICLE_IMAGE_FALLBACK[a.slug ?? ''],
         bodyHtml: Array.isArray(a.body) ? toHTML(a.body) : '',
         disclaimer: (a as { disclaimer?: string }).disclaimer ?? '',
         sourceNote: (a as { sourceNote?: string }).sourceNote ?? '',
         seoTitle: a.seoTitle,
         seoDescription: a.seoDescription,
         publishedAt: a.publishedAt,
+        author: (a as { author?: string }).author,
       },
     },
   }));
@@ -47,6 +54,7 @@ export async function getStaticPaths() {
         seoTitle: undefined,
         seoDescription: a.summary,
         publishedAt: a.publishedAt,
+        author: undefined,
       },
     },
   }));
@@ -55,6 +63,8 @@ export async function getStaticPaths() {
 }
 
 const { article } = Astro.props;
+const publishedLabel = formatArticleDate(article.publishedAt);
+const author = article.author || DEFAULT_ARTICLE_AUTHOR;
 ---
 
 <BaseLayout
@@ -74,6 +84,13 @@ const { article } = Astro.props;
     <h1 class="mt-6 text-4xl font-semibold tracking-tight text-white md:text-5xl">
       {article.title}
     </h1>
+    {
+      publishedLabel && (
+        <p class="mt-5 text-sm text-white/45">
+          Published <time datetime={article.publishedAt}>{publishedLabel}</time>
+        </p>
+      )
+    }
     {article.summary && <p class="mt-6 text-lg leading-8 text-white/72">{article.summary}</p>}
     {
       article.image && (
@@ -85,6 +102,26 @@ const { article } = Astro.props;
       )
     }
     {article.bodyHtml && <div class="article-body mt-10" set:html={article.bodyHtml} />}
+
+    {/* Author block */}
+    <div
+      class="mt-12 flex items-center gap-4 rounded-3xl border border-[#6FD7E3]/20 bg-[#6FD7E3]/10 p-6"
+    >
+      <img src="/fwp-shield.png" alt="" class="h-12 w-auto shrink-0" />
+      <div>
+        <div class="text-xs font-semibold uppercase tracking-[0.18em] text-[#8FE3EC]">
+          Written by
+        </div>
+        <div class="mt-1 text-base font-semibold text-white">{author}</div>
+        {
+          publishedLabel && (
+            <div class="mt-1 text-sm text-white/50">
+              Published <time datetime={article.publishedAt}>{publishedLabel}</time>
+            </div>
+          )
+        }
+      </div>
+    </div>
 
     {
       article.disclaimer && (
