@@ -5,6 +5,7 @@ import { toHTML } from '@portabletext/to-html';
 import { getArticleCards, getArticleBySlug } from '../../lib/sanity';
 import {
   APPROVED_ARTICLES,
+  ARTICLE_AUTHOR,
   ARTICLE_IMAGE_FALLBACK,
   DEFAULT_ARTICLE_AUTHOR,
   formatArticleDate,
@@ -105,22 +106,38 @@ const author = article.author || DEFAULT_ARTICLE_AUTHOR;
 
     {/* Author block */}
     <div
-      class="mt-12 flex items-center gap-4 rounded-3xl border border-[#6FD7E3]/20 bg-[#6FD7E3]/10 p-6"
+      class="mt-12 flex flex-col gap-5 rounded-3xl border border-[#6FD7E3]/20 bg-[#6FD7E3]/10 p-6 sm:flex-row sm:items-center sm:justify-between"
     >
-      <img src="/fwp-shield.png" alt="" class="h-12 w-auto shrink-0" />
-      <div>
-        <div class="text-xs font-semibold uppercase tracking-[0.18em] text-[#8FE3EC]">
-          Written by
+      <div class="flex items-center gap-4">
+        <img src="/fwp-shield.png" alt="" class="h-12 w-auto shrink-0" />
+        <div>
+          <div class="text-xs font-semibold uppercase tracking-[0.18em] text-[#8FE3EC]">
+            Written by
+          </div>
+          <div class="mt-1 text-base font-semibold text-white">{author}</div>
+          <div class="text-sm text-white/60">{ARTICLE_AUTHOR.role}</div>
+          {
+            publishedLabel && (
+              <div class="mt-1 text-sm text-white/45">
+                Published <time datetime={article.publishedAt}>{publishedLabel}</time>
+              </div>
+            )
+          }
         </div>
-        <div class="mt-1 text-base font-semibold text-white">{author}</div>
-        {
-          publishedLabel && (
-            <div class="mt-1 text-sm text-white/50">
-              Published <time datetime={article.publishedAt}>{publishedLabel}</time>
-            </div>
-          )
-        }
       </div>
+      <a
+        href={ARTICLE_AUTHOR.linkedin}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex shrink-0 items-center gap-2 rounded-full border border-[#6FD7E3]/40 px-5 py-2.5 text-sm font-semibold text-[#6FD7E3] transition hover:bg-[#6FD7E3] hover:text-[#0E1020]"
+      >
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path
+            d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0z"
+          ></path>
+        </svg>
+        Connect on LinkedIn
+      </a>
     </div>
 
     {

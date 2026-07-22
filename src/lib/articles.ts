@@ -8,8 +8,18 @@ export interface ArticleCard {
   author?: string;
 }
 
+/**
+ * Byline shown under every article. The CMS `author` field overrides the name only;
+ * role and LinkedIn stay the same.
+ */
+export const ARTICLE_AUTHOR = {
+  name: 'Peter Sa',
+  role: 'Senior Advisor',
+  linkedin: 'https://www.linkedin.com/in/sapeter',
+} as const;
+
 /** Byline used when an article has no explicit author set in the CMS. */
-export const DEFAULT_ARTICLE_AUTHOR = 'Family Wealth Protection Advisory';
+export const DEFAULT_ARTICLE_AUTHOR = ARTICLE_AUTHOR.name;
 
 /** "2026-07-15T09:00:00Z" -> "15 July 2026". Returns '' for missing/invalid dates. */
 export function formatArticleDate(iso?: string): string {
