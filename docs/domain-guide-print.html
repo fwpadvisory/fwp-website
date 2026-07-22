@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>FWP Advisory — Pointing your domain to the new website</title>
+    <style>
+      @page { size: A4; margin: 18mm 16mm; }
+      * { box-sizing: border-box; }
+      body {
+        font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+        color: #2b2b2b; font-size: 10.5pt; line-height: 1.6; margin: 0;
+        -webkit-print-color-adjust: exact; print-color-adjust: exact;
+      }
+      .cover { background: #0e1020; color: #fff; padding: 22mm 16mm 14mm; margin: -18mm -16mm 11mm; }
+      .brand { color: #6fd7e3; letter-spacing: .30em; font-size: 11pt; font-weight: 300; }
+      .brand small { display: block; letter-spacing: .40em; font-size: 6.5pt; color: #8fe3ec; margin-top: 4px; font-weight: 600; }
+      .cover h1 { font-size: 25pt; line-height: 1.15; margin: 11mm 0 3.5mm; font-weight: 600; }
+      .cover p { color: rgba(255,255,255,.72); margin: 0; font-size: 11pt; }
+      .cover-rule { height: 2px; background: #6fd7e3; width: 22mm; margin: 9mm 0 5mm; }
+      .prepared { font-size: 8.5pt; color: rgba(255,255,255,.55); letter-spacing: .04em; }
+      .prepared strong { color: #fff; font-weight: 600; letter-spacing: .02em; }
+      .prepared span { color: #6fd7e3; }
+      h2 { color: #0e1020; font-size: 14pt; margin: 9mm 0 3mm; padding-bottom: 2mm; border-bottom: 2px solid #6fd7e3; }
+      h3 { font-size: 11pt; margin: 5mm 0 2mm; color: #0e1020; }
+      p, li { margin: 0 0 2.5mm; }
+      ul, ol { padding-left: 6mm; margin: 0 0 3mm; }
+      code { background: #eef7f9; padding: 1px 5px; border-radius: 3px; font-size: 9.5pt; }
+      a { color: #127d8c; text-decoration: none; }
+      table { width: 100%; border-collapse: collapse; margin: 3mm 0 4mm; font-size: 9.5pt; }
+      th { background: #0e1020; color: #fff; text-align: left; padding: 2.5mm 3mm; font-weight: 600; }
+      td { border-bottom: 1px solid #dfe6e8; padding: 2.5mm 3mm; vertical-align: top; }
+      tr:nth-child(even) td { background: #f7fbfc; }
+      .note { background: #eef7f9; border-left: 3px solid #6fd7e3; padding: 3mm 4mm; margin: 4mm 0; }
+      .warn { background: #fff4e8; border-left: 3px solid #d98324; padding: 3mm 4mm; margin: 4mm 0; }
+      .warn strong { color: #a5600f; }
+      .avoid { page-break-inside: avoid; }
+      footer { margin-top: 10mm; padding-top: 3mm; border-top: 1px solid #dfe6e8; color: #8a9499; font-size: 8.5pt; }
+      footer strong { color: #0e1020; }
+      footer a { color: #127d8c; }
+    </style>
+  </head>
+  <body>
+    <div class="cover">
+      <div class="brand">FAMILY WEALTH<small>PROTECTION ADVISORY</small></div>
+      <h1>Pointing your domain<br />to the new website</h1>
+      <p>What needs to change at your domain provider — and what stays untouched.</p>
+      <div class="cover-rule"></div>
+      <div class="prepared">
+        Prepared by <strong>The Content Counsel</strong> &nbsp;·&nbsp;
+        <span>thecontentcounsel.com</span>
+      </div>
+    </div>
+
+    <p>
+      The new website is built and running. The last step is to point
+      <strong>fwpadvisory.com.au</strong> at it, so visitors reach the new site instead of the
+      current one.
+    </p>
+
+    <h2>The one thing we must not break</h2>
+    <div class="warn">
+      <strong>Your email must not be touched.</strong> Your email runs on Google Workspace, but the
+      records that control it live in the same place as your website records — currently at
+      <strong>Wix</strong>. If the domain's nameservers are switched over wholesale, email stops
+      working immediately, along with your spam protection (SPF) and Google verification.
+    </div>
+    <p>
+      So we are deliberately <em>not</em> moving your DNS. We change only the two records that
+      control the website, and leave everything else exactly as it is.
+    </p>
+
+    <h2>What changes and what stays</h2>
+    <table class="avoid">
+      <tr><th style="width:34%">Record</th><th style="width:30%">What it controls</th><th>Action</th></tr>
+      <tr><td><strong>A</strong> (for <code>@</code>)</td><td>Your website</td><td><strong>Change</strong> to the value Vercel provides</td></tr>
+      <tr><td><strong>CNAME</strong> (for <code>www</code>)</td><td>The www version of the site</td><td><strong>Change</strong> to the value Vercel provides</td></tr>
+      <tr><td><strong>MX</strong></td><td>Your email</td><td>Leave untouched</td></tr>
+      <tr><td><strong>TXT</strong></td><td>SPF, Google verification</td><td>Leave untouched</td></tr>
+    </table>
+
+    <h2>Step by step</h2>
+    <h3>Step 1 — We add the domain on our side</h3>
+    <p>
+      We add <code>fwpadvisory.com.au</code> and <code>www.fwpadvisory.com.au</code> to the hosting
+      project. The system then displays the two exact records that need to be entered. We will send
+      you those values.
+    </p>
+    <p>They are normally:</p>
+    <table class="avoid">
+      <tr><th style="width:24%">Type</th><th style="width:20%">Name / Host</th><th>Value</th></tr>
+      <tr><td>A</td><td><code>@</code></td><td><code>76.76.21.21</code></td></tr>
+      <tr><td>CNAME</td><td><code>www</code></td><td><code>cname.vercel-dns.com</code></td></tr>
+    </table>
+    <div class="note">
+      Always use the values shown on screen at the time rather than these — they can change.
+    </div>
+
+    <h3>Step 2 — You update the two records at Wix</h3>
+    <ol>
+      <li>Sign in to Wix and open <strong>Domains</strong> → <strong>fwpadvisory.com.au</strong>.</li>
+      <li>Open <strong>DNS Records</strong> (sometimes shown as “Advanced DNS”).</li>
+      <li>Find the <strong>A</strong> records for <code>@</code>. There are currently three, all beginning <code>185.230.63.</code> — remove them and add the single A record we send you.</li>
+      <li>Find the <strong>CNAME</strong> for <code>www</code> (currently <code>cdn1.wixdns.net</code>) and replace its value with the one we send you.</li>
+      <li>Save.</li>
+    </ol>
+    <div class="warn">
+      <strong>Do not change anything else on that page</strong> — in particular the MX and TXT
+      records. Those are your email.
+    </div>
+    <p>
+      If Wix will not let you edit the records because the domain is still connected to your old Wix
+      site, choose <strong>Disconnect site</strong> first. The domain stays in your Wix account and
+      keeps working; only the link to the old site is removed.
+    </p>
+
+    <h3>Step 3 — Wait a short while</h3>
+    <p>
+      The change usually takes effect within 15 minutes to 2 hours. The security certificate
+      (the padlock in the browser) is issued automatically once the records are visible — nothing to
+      buy or install.
+    </p>
+
+    <h2>What we do straight afterwards</h2>
+    <p>Once the domain resolves to the new site, we complete the remaining technical work:</p>
+    <ul>
+      <li>Point the site's internal addresses and sitemap at the new domain.</li>
+      <li>Re-authorise the content editor (Sanity Studio) for the new domain.</li>
+      <li>Update the BOMA guide form: add the domain to its allowed list and repoint the
+        post-submission page. <em>Without this the free-guide form stops working on the new domain,
+        so it is done immediately.</em></li>
+      <li>Set up Google Search Console for the domain and submit the sitemap.</li>
+      <li>Re-test the whole site on desktop and mobile.</li>
+    </ul>
+
+    <h2>Good to know</h2>
+    <ul>
+      <li><strong>Timing.</strong> Pick a quiet period rather than a busy weekday morning. There is
+        no outage as such, but visitors move across gradually as the change propagates.</li>
+      <li><strong>Reversible.</strong> If anything looks wrong, putting the original A and CNAME
+        values back restores the old site.</li>
+      <li><strong>Your old Wix site.</strong> Once the domain points to the new website, the Wix
+        site will no longer be reachable at this address. Keep a copy of anything you still need
+        from it.</li>
+      <li><strong>Email, again.</strong> Because we never touch MX or TXT, your email keeps running
+        throughout with no interruption.</li>
+    </ul>
+
+    <footer>
+      <strong>The Content Counsel</strong> &nbsp;·&nbsp;
+      <a href="https://thecontentcounsel.com">thecontentcounsel.com</a>
+    </footer>
+  </body>
+</html>
