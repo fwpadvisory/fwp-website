@@ -14,7 +14,7 @@ export interface ArticleCard {
  */
 export const ARTICLE_AUTHOR = {
   name: 'Peter Sa',
-  role: 'Senior Advisor',
+  role: 'Senior Adviser',
   linkedin: 'https://www.linkedin.com/in/sapeter',
 } as const;
 

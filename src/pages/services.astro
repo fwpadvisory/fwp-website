@@ -8,7 +8,6 @@ const services = [
   {
     icon: ShieldCheck,
     title: 'Asset Protection Strategy',
-    image: '/images/cards/svc-asset-protection.jpg',
     subtitle: 'Reduce exposure to claims, creditors, and legal risk',
     body: 'We identify where control, ownership, guarantees, entities, or documentation may create exposure, then design a strategy to reduce avoidable risk.',
     idealFor: 'Business owners, professionals, investors, and families with assets exposed to commercial or personal risk.',
@@ -17,7 +16,6 @@ const services = [
   {
     icon: Landmark,
     title: 'Succession Planning',
-    image: '/images/cards/svc-succession.jpg',
     subtitle: 'Control where your assets are intended to go',
     body: 'We help you clarify who should control, receive, or benefit from your assets, then coordinate the legal steps needed to support that outcome.',
     idealFor: 'Families, business owners, blended families, and people who want clarity before conflict arises.',
@@ -26,7 +24,6 @@ const services = [
   {
     icon: Network,
     title: 'Trust & Entity Restructuring',
-    image: '/images/cards/svc-restructuring.jpg',
     subtitle: 'Review structures that may no longer suit your position',
     body: 'We review existing entities and arrangements to identify gaps, outdated documents, control issues, and potential exposure points.',
     idealFor: 'People with family trusts, companies, legacy structures, or arrangements created years ago and never properly reviewed.',
@@ -35,7 +32,6 @@ const services = [
   {
     icon: SearchCheck,
     title: 'Risk Review & Strategy',
-    image: '/images/cards/svc-risk-review.jpg',
     subtitle: 'Identify hidden risks before they become problems',
     body: 'We assess your current position, identify practical risks, and give you a clear strategy before you commit to implementation.',
     idealFor: 'People who are unsure whether their current arrangements are sufficient or who want a second set of eyes.',
@@ -66,13 +62,8 @@ const supporting = [
   <section class="relative z-10 mx-auto max-w-7xl px-6 pb-24 lg:px-8">
     <div class="grid gap-6 md:grid-cols-2">
       {
-        services.map(({ icon: Icon, title, image, subtitle, body, idealFor, receives }) => (
-          <div class="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04]">
-            <div class="relative h-40">
-              <img src={image} alt="" loading="lazy" class="h-full w-full object-cover" />
-              <div class="absolute inset-0 bg-gradient-to-t from-[#0E1020] via-[#0E1020]/45 to-transparent" />
-            </div>
-            <div class="p-7">
+        services.map(({ icon: Icon, title, subtitle, body, idealFor, receives }) => (
+          <div class="rounded-3xl border border-white/10 bg-white/[0.04] p-7">
             <Icon className="mb-5 h-7 w-7 text-[#6FD7E3]" />
             <h3 class="text-xl font-semibold text-white">{title}</h3>
             <p class="mt-2 text-sm font-medium text-[#8FE3EC]">{subtitle}</p>
@@ -84,7 +75,6 @@ const supporting = [
               <p>
                 <span class="font-semibold text-white/85">You receive:</span> {receives}
               </p>
-            </div>
             </div>
           </div>
         ))

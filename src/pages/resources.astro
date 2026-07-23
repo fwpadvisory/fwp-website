@@ -115,11 +115,17 @@ const VIDEO_TITLE = 'Five Asset Protection Risks People Often Miss';
           articles.map((item) => (
             <article class="flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04]">
               {(item.image ?? ARTICLE_IMAGE_FALLBACK[item.slug ?? '']) && (
-                <img
-                  src={item.image ?? ARTICLE_IMAGE_FALLBACK[item.slug ?? '']}
-                  alt=""
-                  class="aspect-[16/9] w-full object-cover"
-                />
+                /* One editorial family: same crop, same restrained navy overlay. */
+                <div class="relative aspect-[16/9] w-full overflow-hidden">
+                  <img
+                    src={item.image ?? ARTICLE_IMAGE_FALLBACK[item.slug ?? '']}
+                    alt=""
+                    loading="lazy"
+                    class="h-full w-full object-cover"
+                  />
+                  <div class="absolute inset-0 bg-[#0E1020]/35" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-[#0E1020]/85 to-transparent" />
+                </div>
               )}
               <div class="flex flex-1 flex-col p-7">
                 {formatArticleDate(item.publishedAt) && (

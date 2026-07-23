@@ -18,16 +18,20 @@ const btnClass =
 
 <section class={`relative z-10 px-6 ${compact ? 'py-8' : 'py-20'} lg:px-8`}>
   <div
-    class="relative mx-auto grid max-w-7xl gap-8 overflow-hidden rounded-[2rem] border border-[#6FD7E3]/20 p-8 md:p-10 lg:grid-cols-[0.95fr_1.05fr]"
+    class={`relative mx-auto grid max-w-7xl gap-8 overflow-hidden rounded-[2rem] border border-[#6FD7E3]/20 p-8 md:p-10 lg:grid-cols-[0.95fr_1.05fr] ${compact ? 'bg-[#6FD7E3]/10' : ''}`}
   >
-    <div class="absolute inset-0 -z-10" aria-hidden="true">
-      <img src="/images/section-gold.jpg" alt="" class="h-full w-full object-cover" />
-      <div class="absolute inset-0 bg-[#0E1020]/70"></div>
-      <div
-        class="absolute inset-0 bg-gradient-to-r from-[#0E1020]/95 via-[#0E1020]/70 to-transparent"
-      >
+    {/* Only the full block carries the bronze/gold image. The compact instance is a
+        plain branded panel so the same image never appears twice on one page. */}
+    {!compact && (
+      <div class="absolute inset-0 -z-10" aria-hidden="true">
+        <img src="/images/section-gold.jpg" alt="" class="h-full w-full object-cover" />
+        <div class="absolute inset-0 bg-[#0E1020]/70"></div>
+        <div
+          class="absolute inset-0 bg-gradient-to-r from-[#0E1020]/95 via-[#0E1020]/70 to-transparent"
+        >
+        </div>
       </div>
-    </div>
+    )}
     <div>
       <SectionLabel>Free guide</SectionLabel>
       <h2 class="text-3xl font-semibold tracking-tight text-white md:text-4xl">

@@ -7,7 +7,7 @@ export interface Faq {
 export const homeFaqs: Faq[] = [
   {
     q: 'Are you lawyers?',
-    a: 'No. We are strategic advisors. We help identify the risks, design the strategy, and coordinate with specialist legal professionals where legal documents or advice are required.',
+    a: 'No. We are strategic advisers. We help identify the risks, design the strategy, and coordinate with specialist legal professionals where legal documents or advice are required.',
   },
   {
     q: 'Is this legal or financial advice?',
@@ -19,11 +19,11 @@ export const homeFaqs: Faq[] = [
   },
   {
     q: 'What happens in the Discovery Meeting?',
-    a: 'We discuss your situation, current structures, key risks, and what you want to happen. The aim is to decide whether a strategy paper would be useful for your circumstances.',
+    a: 'We complete your Family Wealth Protection Assessment together, covering your situation, current structures, key risks, and what you want to happen. Afterwards you receive a free, personalised Asset Protection Gap Report.',
   },
   {
-    q: 'Do I have to proceed after the strategy meeting?',
-    a: 'No. The strategy presentation is designed to give you clarity. You can then decide whether to proceed with implementation.',
+    q: 'Do I have to proceed after receiving my Asset Protection Blueprint?',
+    a: 'No. The Blueprint is designed to give you clarity. You can then decide whether to proceed with implementation, and the professional fee paid for the Blueprint is credited towards it.',
   },
   {
     q: 'What if I already have a trust, company, will, or estate plan?',

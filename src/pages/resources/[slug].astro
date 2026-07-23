@@ -95,11 +95,11 @@ const author = article.author || DEFAULT_ARTICLE_AUTHOR;
     {article.summary && <p class="mt-6 text-lg leading-8 text-white/72">{article.summary}</p>}
     {
       article.image && (
-        <img
-          src={article.image}
-          alt=""
-          class="mt-8 aspect-[16/9] w-full rounded-3xl border border-white/10 object-cover"
-        />
+        <div class="relative mt-8 aspect-[16/9] w-full overflow-hidden rounded-3xl border border-white/10">
+          <img src={article.image} alt="" class="h-full w-full object-cover" />
+          <div class="absolute inset-0 bg-[#0E1020]/35" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0E1020]/85 to-transparent" />
+        </div>
       )
     }
     {article.bodyHtml && <div class="article-body mt-10" set:html={article.bodyHtml} />}
