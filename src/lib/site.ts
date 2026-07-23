@@ -69,6 +69,16 @@ export const COMPANY = {
   email: 'hello@fwpadvisory.com.au',
   phone: '+61 475 219 534',
   phoneHref: 'tel:+61475219534',
-  address: 'Corporate House, 138 Juliette St, Greenslopes QLD 4120',
+  address: '2/14 Edgewater Court, Robina Qld 4226',
+  postalAddress: 'PO Box 4028, Ashmore Qld 4214',
   compliance: 'General information only. Not legal or financial advice.',
 } as const;
+
+/** Social profiles shown under "Connect" in the footer. */
+export const SOCIAL_LINKS: NavItem[] = [
+  {
+    href: 'https://www.linkedin.com/company/family-wealth-protection-advisory-pty-ltd/',
+    label: 'LinkedIn',
+  },
+  { href: 'https://www.youtube.com/channel/UCZZDxf8nPAxFLbC7eB4ZPOA', label: 'YouTube' },
+];

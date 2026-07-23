@@ -1,18 +1,54 @@
 ---
-import { LEGAL_ITEMS, COMPANY } from '../lib/site';
+import { LEGAL_ITEMS, COMPANY, SOCIAL_LINKS } from '../lib/site';
 ---
 
 <footer class="relative z-10 border-t border-white/10 px-6 py-10 lg:px-8">
   <div class="mx-auto flex max-w-7xl flex-col gap-8">
-    <div class="flex items-center gap-4">
+    <div
+      class="flex flex-col gap-8 md:flex-row md:items-start md:justify-between"
+    >
       <img
         src="/sapepaa-certified-adviser.png"
         alt="SAPEPAA Certified Adviser"
-        class="h-14 w-auto"
+        class="h-14 w-auto shrink-0"
         width="280"
         height="100"
         loading="lazy"
       />
+
+      <div class="flex flex-col gap-8 text-sm text-white/55 sm:flex-row sm:gap-12">
+        <div>
+          <div class="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#8FE3EC]">
+            Connect
+          </div>
+          <div class="flex flex-col gap-2">
+            {
+              SOCIAL_LINKS.map((item) => (
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="hover:text-white"
+                >
+                  {item.label}
+                </a>
+              ))
+            }
+          </div>
+        </div>
+
+        <div>
+          <div class="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#8FE3EC]">
+            Contact
+          </div>
+          <div class="flex flex-col gap-2 not-italic">
+            <a href={`mailto:${COMPANY.email}`} class="hover:text-white">{COMPANY.email}</a>
+            <a href={COMPANY.phoneHref} class="hover:text-white">{COMPANY.phone}</a>
+            <span>{COMPANY.address}</span>
+            <span>{COMPANY.postalAddress}</span>
+          </div>
+        </div>
+      </div>
     </div>
     <div
       class="flex flex-col gap-6 text-sm text-white/50 md:flex-row md:items-center md:justify-between"
