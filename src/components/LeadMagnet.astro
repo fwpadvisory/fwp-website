@@ -8,9 +8,12 @@ import { LEAD_MAGNET } from '../lib/site';
 // Here we link through to it.
 interface Props {
   compact?: boolean;
+  /** Carries the single bronze/gold treatment. Only the first block on a page sets this;
+   *  any later block renders as a plain branded panel so the image is never repeated. */
+  image?: boolean;
 }
 
-const { compact = false } = Astro.props;
+const { compact = false, image = false } = Astro.props;
 
 const btnClass =
   'inline-flex items-center justify-center whitespace-nowrap rounded-full bg-[#6FD7E3] px-6 py-3 text-sm font-semibold text-[#0E1020] shadow-lg shadow-[#6FD7E3]/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#8FE3EC]';
@@ -18,11 +21,9 @@ const btnClass =
 
 <section class={`relative z-10 px-6 ${compact ? 'py-8' : 'py-20'} lg:px-8`}>
   <div
-    class={`relative mx-auto grid max-w-7xl gap-8 overflow-hidden rounded-[2rem] border border-[#6FD7E3]/20 p-8 md:p-10 lg:grid-cols-[0.95fr_1.05fr] ${compact ? 'bg-[#6FD7E3]/10' : ''}`}
+    class={`relative mx-auto grid max-w-7xl gap-8 overflow-hidden rounded-[2rem] border border-[#6FD7E3]/20 p-8 md:p-10 lg:grid-cols-[0.95fr_1.05fr] ${image ? '' : 'bg-[#6FD7E3]/10'}`}
   >
-    {/* Only the full block carries the bronze/gold image. The compact instance is a
-        plain branded panel so the same image never appears twice on one page. */}
-    {!compact && (
+    {image && (
       <div class="absolute inset-0 -z-10" aria-hidden="true">
         <img src="/images/section-gold.jpg" alt="" class="h-full w-full object-cover" />
         <div class="absolute inset-0 bg-[#0E1020]/70"></div>
