@@ -107,11 +107,11 @@ const received = [
       <img
         src="/images/hero-bronze-stairway.jpg"
         alt=""
-        class="h-full w-full object-cover object-bottom [filter:brightness(1.68)_contrast(1.42)_saturate(1.02)]"
+        class="h-full w-full object-cover object-bottom"
       />
-      {/* Brightness + contrast lift the orange-gold and sharpen the stair edges;
-          saturation stays low so it reads gold rather than red. The gradient then
-          darkens only the left so the headline stays legible. */}
+      {/* The source image already carries the approved orange-gold lighting, so it runs
+          ungraded. Only a left-side gradient is applied, purely so the headline stays
+          legible; the lit right-hand side is left untouched. */}
       <div
         class="absolute inset-0 bg-gradient-to-r from-[#0E1020] from-18% via-[#0E1020]/78 via-52% to-transparent"
       >
