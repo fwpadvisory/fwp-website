@@ -27,8 +27,10 @@ export default defineConfig({
       studioBasePath: '/studio', // embedded Sanity Studio
     }),
     sitemap({
-      // Keep gated/noindex legal placeholders and the /studio admin out of the sitemap.
-      filter: (page) => !/\/(disclaimer|privacy|terms)\/?$/.test(page) && !page.includes('/studio'),
+      // Keep noindex pages (staged legal drafts, post-submit thank-you) and the
+      // /studio admin out of the sitemap.
+      filter: (page) =>
+        !/\/(disclaimer|privacy|terms|thank-you)\/?$/.test(page) && !page.includes('/studio'),
     }),
   ],
   vite: {

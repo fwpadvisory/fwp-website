@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>FWP Advisory — Adding and editing articles</title>
+    <style>
+      @page { size: A4; margin: 18mm 16mm; }
+      * { box-sizing: border-box; }
+      body {
+        font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+        color: #2b2b2b; font-size: 10.5pt; line-height: 1.6; margin: 0;
+        -webkit-print-color-adjust: exact; print-color-adjust: exact;
+      }
+      .cover { background: #0e1020; color: #fff; padding: 22mm 16mm 14mm; margin: -18mm -16mm 11mm; }
+      .brand { color: #6fd7e3; letter-spacing: .30em; font-size: 11pt; font-weight: 300; }
+      .brand small { display: block; letter-spacing: .40em; font-size: 6.5pt; color: #8fe3ec; margin-top: 4px; font-weight: 600; }
+      .cover h1 { font-size: 25pt; line-height: 1.15; margin: 11mm 0 3.5mm; font-weight: 600; }
+      .cover p { color: rgba(255,255,255,.72); margin: 0; font-size: 11pt; }
+      .cover-rule { height: 2px; background: #6fd7e3; width: 22mm; margin: 9mm 0 5mm; }
+      .prepared { font-size: 8.5pt; color: rgba(255,255,255,.55); letter-spacing: .04em; }
+      .prepared strong { color: #fff; font-weight: 600; letter-spacing: .02em; }
+      .prepared span { color: #6fd7e3; }
+      h2 { color: #0e1020; font-size: 14pt; margin: 9mm 0 3mm; padding-bottom: 2mm; border-bottom: 2px solid #6fd7e3; }
+      h3 { font-size: 11pt; margin: 5mm 0 2mm; color: #0e1020; }
+      p, li { margin: 0 0 2.5mm; }
+      ul, ol { padding-left: 6mm; margin: 0 0 3mm; }
+      code { background: #eef7f9; padding: 1px 5px; border-radius: 3px; font-size: 9.5pt; }
+      a { color: #127d8c; text-decoration: none; }
+      table { width: 100%; border-collapse: collapse; margin: 3mm 0 4mm; font-size: 9.5pt; }
+      th { background: #0e1020; color: #fff; text-align: left; padding: 2.5mm 3mm; font-weight: 600; }
+      td { border-bottom: 1px solid #dfe6e8; padding: 2.5mm 3mm; vertical-align: top; }
+      tr:nth-child(even) td { background: #f7fbfc; }
+      .note { background: #eef7f9; border-left: 3px solid #6fd7e3; padding: 3mm 4mm; margin: 4mm 0; }
+      .url { background: #0e1020; color: #6fd7e3; padding: 3mm 4mm; border-radius: 4px; font-size: 11pt; font-weight: 600; text-align: center; margin: 3mm 0 4mm; }
+      .avoid { page-break-inside: avoid; }
+      footer { margin-top: 10mm; padding-top: 3mm; border-top: 1px solid #dfe6e8; color: #8a9499; font-size: 8.5pt; }
+      footer strong { color: #0e1020; }
+      footer a { color: #127d8c; }
+    </style>
+  </head>
+  <body>
+    <div class="cover">
+      <div class="brand">FAMILY WEALTH<small>PROTECTION ADVISORY</small></div>
+      <h1>Adding and editing<br />articles on your website</h1>
+      <p>A short guide to Sanity Studio — no technical knowledge needed.</p>
+      <div class="cover-rule"></div>
+      <div class="prepared">
+        Prepared by <strong>The Content Counsel</strong> &nbsp;·&nbsp;
+        <span>thecontentcounsel.com</span>
+      </div>
+    </div>
+
+    <p>
+      Your website articles live in a content editor called <strong>Sanity Studio</strong>. You can
+      write, edit and publish articles yourself — no developer needed, and nothing in the website
+      code has to change.
+    </p>
+
+    <h2>1. Opening the editor</h2>
+    <div class="url">fwpadvisory.com.au/studio</div>
+    <p>
+      While the site is still on its temporary address, use
+      <code>fwp-website-mu.vercel.app/studio</code>.
+    </p>
+    <p>
+      Sign in with the Google account you used to create the Sanity project. You only need to do
+      this once per device.
+    </p>
+
+    <h2>2. Writing a new article</h2>
+    <ol>
+      <li>In the left-hand list, click <strong>Article</strong>.</li>
+      <li>Click the <strong>+</strong> (new document) button at the top.</li>
+      <li>Fill in the fields (see the next section).</li>
+      <li>Click <strong>Publish</strong> (bottom right) when you are ready for it to go live.</li>
+    </ol>
+    <p>
+      Your article appears at the top of <strong>Latest Articles</strong> on the Resources page —
+      newest first, automatically. You never need to sort or categorise anything.
+    </p>
+
+    <h2>3. What each field does</h2>
+    <table class="avoid">
+      <tr><th style="width:32%">Field</th><th>What to put in it</th></tr>
+      <tr><td><strong>Title</strong></td><td>The article headline.</td></tr>
+      <tr><td><strong>Slug</strong></td><td>The web address. Click <strong>Generate</strong> and it fills itself in from the title.</td></tr>
+      <tr><td><strong>Category</strong></td><td>Optional. Leave blank if you like — it isn't shown on the website.</td></tr>
+      <tr><td><strong>Excerpt / summary</strong></td><td>1–2 sentences. This is the text shown on the article card.</td></tr>
+      <tr><td><strong>Author</strong></td><td>Optional. Leave blank and it shows the standard byline.</td></tr>
+      <tr><td><strong>Body</strong></td><td>The article itself. See “Formatting” below.</td></tr>
+      <tr><td><strong>Featured image</strong></td><td>The picture on the card and at the top of the article.</td></tr>
+      <tr><td><strong>Disclaimer</strong></td><td>Your general-information disclaimer, shown in a box at the foot of the article.</td></tr>
+      <tr><td><strong>Source note</strong></td><td>Optional. Case references or sources, in small text at the very bottom.</td></tr>
+      <tr><td><strong>SEO title / description</strong></td><td>Optional. Only fill in if you want Google to show something different from the title and summary.</td></tr>
+      <tr><td><strong>Publication date</strong></td><td>The date shown on the article and used to order the list.</td></tr>
+    </table>
+
+    <h2>4. Formatting the body</h2>
+    <p>The <strong>Body</strong> field works like a simple word processor.</p>
+    <ul>
+      <li>Type normally for ordinary paragraphs.</li>
+      <li>For a <strong>heading</strong>, highlight the line and choose <strong>H2</strong> from the style dropdown (the box that says “Normal”).</li>
+      <li>For a <strong>bullet list</strong>, click the bullet-list icon in the toolbar.</li>
+      <li>For <strong>bold</strong> or <em>italic</em>, highlight the text and use the toolbar buttons.</li>
+    </ul>
+    <div class="note">
+      Keep headings as <strong>H2</strong> — the website styles them to match the rest of the site.
+    </div>
+
+    <h2>5. Adding a featured image</h2>
+    <ol>
+      <li>Scroll to <strong>Featured image</strong>.</li>
+      <li>Click <strong>Upload</strong> and choose a picture from your computer.</li>
+      <li>After it uploads, drag the small circle on the image to choose which part stays visible when the picture is cropped on smaller screens.</li>
+    </ol>
+    <p>Landscape pictures work best. Anything roughly 1200–1600 pixels wide is plenty.</p>
+
+    <h2>6. Drafts, editing and unpublishing</h2>
+    <ul>
+      <li><strong>Save a draft</strong> — just stop typing. Sanity saves automatically, and the document stays a draft until you press <strong>Publish</strong>. Drafts are never visible on the website.</li>
+      <li><strong>Edit a published article</strong> — open it, make your changes, then press <strong>Publish</strong> again to push the update live.</li>
+      <li><strong>Take an article down</strong> — open it, click the <strong>⋮</strong> menu at the bottom and choose <strong>Unpublish</strong>. It disappears from the website but stays in the editor.</li>
+      <li><strong>Undo</strong> — the <strong>⋮</strong> menu also has document history, so you can return to an earlier version.</li>
+    </ul>
+
+    <h2>7. When do changes appear on the website?</h2>
+    <p>
+      The website is a fast static site, which means it is rebuilt after content changes rather than
+      reading the database on every visit.
+    </p>
+    <ul>
+      <li><strong>Right now:</strong> after you press Publish, let us know and we will refresh the site.</li>
+      <li><strong>Once automatic publishing is switched on</strong> (waiting on one outstanding technical item), your changes will appear on their own within a few minutes.</li>
+    </ul>
+    <div class="note">
+      If you have published something and don't see it on the site yet, that is why — the content is
+      safe, the site just needs its refresh.
+    </div>
+
+    <h2>8. A few tips</h2>
+    <ul>
+      <li>Write in the editor rather than pasting from Word — pasted text sometimes brings hidden formatting with it. If you do paste, use <strong>Paste and match style</strong> (Cmd+Shift+V).</li>
+      <li>Always fill in the <strong>Excerpt</strong> — it is what people read on the card before clicking.</li>
+      <li>Keep the <strong>Disclaimer</strong> on every article for consistency.</li>
+      <li>Nothing you do in the editor can break the website design. The worst case is an article that needs tidying up.</li>
+    </ul>
+
+    <footer>
+      <strong>The Content Counsel</strong> &nbsp;·&nbsp;
+      <a href="https://thecontentcounsel.com">thecontentcounsel.com</a>
+    </footer>
+  </body>
+</html>

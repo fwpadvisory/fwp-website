@@ -1,31 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageHero from '../components/PageHero.astro';
+import LegalDoc from '../components/LegalDoc.astro';
+import { PRIVACY_POLICY } from '../lib/legal';
 
-// Legal copy is gated: do NOT publish draft text. Final copy comes from the client /
-// legal sign-off (CLAUDE.md). This page stays a clearly-marked placeholder.
+// Staged draft (client-provided, pending LightYear Legal review). Kept `noindex`
+// until Peter confirms the final wording after review.
 ---
 
 <BaseLayout
   title="Privacy Policy - FWP Advisory"
-  description="Privacy policy for the FWP Advisory website."
+  description="How FWP Advisory collects, uses, discloses and protects personal information."
   noindex
 >
-  <PageHero
-    label="Privacy Policy"
-    title="Privacy Policy"
-    body="This page is awaiting final legal copy and should be reviewed before publication."
-    booking={false}
-  />
-  <section class="relative z-10 mx-auto max-w-4xl px-6 pb-28 lg:px-8">
-    <div
-      class="space-y-4 rounded-3xl border border-[#6FD7E3]/20 bg-[#6FD7E3]/10 p-8 text-lg leading-8 text-white/70 md:p-10"
-    >
-      <p class="font-semibold text-white">TODO: awaiting final legal copy.</p>
-      <p>
-        This page will be populated from the approved privacy policy once signed off. Draft text is
-        not published.
-      </p>
-    </div>
-  </section>
+  <LegalDoc doc={PRIVACY_POLICY} />
 </BaseLayout>

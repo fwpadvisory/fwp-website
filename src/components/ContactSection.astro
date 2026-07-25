@@ -36,8 +36,12 @@ import { COMPANY } from '../lib/site';
         >
           <Phone className="h-5 w-5 text-[#6FD7E3]" /><span>{COMPANY.phone}</span>
         </a>
-        <div class="flex items-center gap-4 rounded-2xl bg-[#0E1020]/60 p-4 text-white/75">
-          <MapPin className="h-5 w-5 text-[#6FD7E3]" /><span>{COMPANY.address}</span>
+        <div class="flex items-start gap-4 rounded-2xl bg-[#0E1020]/60 p-4 text-white/75">
+          <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-[#6FD7E3]" />
+          <span>
+            {COMPANY.address}
+            <span class="mt-1 block text-white/55">Postal: {COMPANY.postalAddress}</span>
+          </span>
         </div>
       </div>
       <p class="mt-7 text-sm leading-6 text-white/50">ABN: {COMPANY.abn}</p>

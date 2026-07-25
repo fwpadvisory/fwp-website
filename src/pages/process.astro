@@ -7,30 +7,45 @@ const steps = [
   {
     n: '1',
     title: 'Discovery Meeting',
-    text: 'Before we meet, you complete a short survey. In our discovery meeting, we uncover the specific risks to your assets - whether from legal claims, disputes, or unintended outcomes - and clarify exactly what you want to happen.',
+    text: 'Together, we complete your Family Wealth Protection Assessment to understand your circumstances, assets and existing protections. After the discovery meeting, you’ll receive a free, personalised Asset Protection Gap Report identifying potential gaps in your current asset protection.',
   },
   {
     n: '2',
-    title: 'Personalised Strategy Paper',
-    text: 'Based on your situation, a clear, easy-to-read strategy paper is prepared. It explains the risks, recommended pathway, and structures to consider - without legal jargon.',
+    title: 'Asset Protection Blueprint',
+    text: 'I review the findings in your Asset Protection Gap Report and develop a personalised strategy to address them. Your Asset Protection Blueprint outlines the recommended structures and actions to better protect your family’s wealth. A separate professional fee applies.',
   },
   {
     n: '3',
-    title: 'Strategy Presentation Meeting',
-    text: 'We walk you through the strategy, answer your questions, and where appropriate, outline the implementation pathway and expected costs. There is no obligation to proceed.',
+    title: 'Blueprint Implementation',
+    text: 'I walk you through your Asset Protection Blueprint, answer your questions and explain the recommended implementation process and costs. If you choose to proceed, I coordinate the work required to put your Blueprint in place. The professional fee for Step 2 is credited towards implementation, with no obligation to proceed.',
   },
 ];
 ---
 
 <BaseLayout
   title="Process - FWP Advisory"
-  description="A clear process before implementation begins: Discovery Meeting, personalised strategy paper, and strategy presentation meeting."
+  description="A clear process before implementation begins: Discovery Meeting and Asset Protection Gap Report, Asset Protection Blueprint, and Blueprint Implementation."
 >
   <PageHero
     label="Process"
     title="A Clear Process Before Implementation Begins"
-    body="The process is designed to help you understand the risks, receive a written strategy, and decide whether implementation is appropriate for your circumstances."
+    body="The process is designed to help you understand where your protection has gaps, receive a personalised Asset Protection Blueprint, and decide whether implementation is appropriate for your circumstances."
   />
+
+  {/* One subtle page-level pathway image near the introduction. The three numbered
+      steps below stay image-free. */}
+  <section class="relative z-10 mx-auto max-w-5xl px-6 pb-12 lg:px-8">
+    <div class="relative h-48 overflow-hidden rounded-[2rem] border border-white/10 md:h-60">
+      <img
+        src="/images/process-doorway.jpg"
+        alt=""
+        loading="lazy"
+        class="h-full w-full object-cover object-center"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-[#0E1020] via-[#0E1020]/35 to-transparent">
+      </div>
+    </div>
+  </section>
 
   <section class="relative z-10 mx-auto max-w-5xl px-6 pb-24 lg:px-8">
     <div class="space-y-6">

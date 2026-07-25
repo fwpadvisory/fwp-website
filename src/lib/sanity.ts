@@ -23,12 +23,15 @@ export interface ArticleFull extends ArticleCard {
 }
 
 const CARDS_QUERY = `*[_type == "article" && defined(slug.current)] | order(publishedAt desc){
-  title, "slug": slug.current, category, "summary": excerpt
+  title, "slug": slug.current, category, "summary": excerpt, publishedAt,
+  author,
+  "image": coverImage.asset->url
 }`;
 
 const BY_SLUG_QUERY = `*[_type == "article" && slug.current == $slug][0]{
   title, "slug": slug.current, category, "summary": excerpt, excerpt, body, publishedAt,
-  seoTitle, seoDescription, "coverImage": coverImage.asset->url
+  author,
+  disclaimer, sourceNote, seoTitle, seoDescription, "coverImage": coverImage.asset->url
 }`;
 
 /** Article cards for the Resources grid. Empty until a real project has content. */

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>FWP Advisory — Pointing your domain to the new website</title>
+    <style>
+      @page { size: A4; margin: 18mm 16mm; }
+      * { box-sizing: border-box; }
+      body {
+        font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+        color: #2b2b2b; font-size: 10.5pt; line-height: 1.55; margin: 0;
+        -webkit-print-color-adjust: exact; print-color-adjust: exact;
+      }
+      .cover { background: #0e1020; color: #fff; padding: 19mm 16mm 9mm; margin: -18mm -16mm 7mm; }
+      .brand { color: #6fd7e3; letter-spacing: .30em; font-size: 11pt; font-weight: 300; }
+      .brand small { display: block; letter-spacing: .40em; font-size: 6.5pt; color: #8fe3ec; margin-top: 4px; font-weight: 600; }
+      .cover h1 { font-size: 22pt; line-height: 1.15; margin: 6mm 0 2.5mm; font-weight: 600; }
+      .cover p { color: rgba(255,255,255,.72); margin: 0; font-size: 11pt; }
+      .cover-rule { height: 2px; background: #6fd7e3; width: 22mm; margin: 5mm 0 3.5mm; }
+      .prepared { font-size: 8.5pt; color: rgba(255,255,255,.55); letter-spacing: .04em; }
+      .prepared strong { color: #fff; font-weight: 600; letter-spacing: .02em; }
+      .prepared span { color: #6fd7e3; }
+      h2 { color: #0e1020; font-size: 13.5pt; margin: 6mm 0 2.5mm; padding-bottom: 2mm; border-bottom: 2px solid #6fd7e3; }
+      p, li { margin: 0 0 2.4mm; }
+      ol { padding-left: 6mm; margin: 0 0 3mm; }
+      li { padding-left: 1mm; }
+      code { background: #eef7f9; padding: 1px 5px; border-radius: 3px; font-size: 10pt; }
+      a { color: #127d8c; text-decoration: none; }
+      table { width: 100%; border-collapse: collapse; margin: 3mm 0 4mm; font-size: 10pt; }
+      th { background: #0e1020; color: #fff; text-align: left; padding: 2.5mm 3mm; font-weight: 600; }
+      td { border-bottom: 1px solid #dfe6e8; padding: 2.4mm 3mm; vertical-align: top; }
+      tr:nth-child(even) td { background: #f7fbfc; }
+      .warn { background: #fff4e8; border-left: 3px solid #d98324; padding: 3.5mm 4mm; margin: 4mm 0; }
+      .warn strong { color: #a5600f; }
+      footer { margin-top: 7mm; padding-top: 3mm; border-top: 1px solid #dfe6e8; color: #8a9499; font-size: 8.5pt; }
+      footer strong { color: #0e1020; }
+      footer a { color: #127d8c; }
+    </style>
+  </head>
+  <body>
+    <div class="cover">
+      <div class="brand">FAMILY WEALTH<small>PROTECTION ADVISORY</small></div>
+      <h1>Pointing your domain<br />to the new website</h1>
+      <p>Two records to change at Wix. Nothing else.</p>
+      <div class="cover-rule"></div>
+      <div class="prepared">
+        Prepared by <strong>The Content Counsel</strong> &nbsp;·&nbsp;
+        <span>thecontentcounsel.com</span>
+      </div>
+    </div>
+
+    <p>
+      To make <strong>fwpadvisory.com.au</strong> show the new website, two records need to be
+      updated at Wix. We will send you the exact values to paste in.
+    </p>
+
+    <div class="warn">
+      <strong>Please don't change anything else.</strong> Your email runs on Google Workspace and is
+      controlled from the same page. As long as the <strong>MX</strong> and <strong>TXT</strong>
+      records are left alone, your email keeps working with no interruption.
+    </div>
+
+    <h2>The two records</h2>
+    <table>
+      <tr><th style="width:22%">Type</th><th style="width:22%">Name</th><th>New value</th></tr>
+      <tr><td>A</td><td><code>@</code></td><td><code>76.76.21.21</code></td></tr>
+      <tr><td>CNAME</td><td><code>www</code></td><td><code>cname.vercel-dns.com</code></td></tr>
+    </table>
+
+    <h2>Steps in Wix</h2>
+    <ol>
+      <li>Sign in to Wix and open <strong>Domains</strong> → <strong>fwpadvisory.com.au</strong>.</li>
+      <li>Open <strong>DNS Records</strong>.</li>
+      <li>Under <strong>A</strong> records you'll see three entries starting with
+        <code>185.230.63.</code> — delete them and add the single A record above.</li>
+      <li>Under <strong>CNAME</strong>, find <code>www</code> and change its value to the one above.</li>
+      <li>Save.</li>
+    </ol>
+    <p>
+      If Wix won't let you edit the records, choose <strong>Disconnect site</strong> first. Your
+      domain stays in your Wix account.
+    </p>
+
+    <h2>Then</h2>
+    <p>
+      Let us know once it's saved. The change takes effect within 15 minutes to 2 hours, the padlock
+      (security certificate) appears automatically, and we finish the rest from our side.
+    </p>
+
+    <footer>
+      <strong>The Content Counsel</strong> &nbsp;·&nbsp;
+      <a href="https://thecontentcounsel.com">thecontentcounsel.com</a>
+    </footer>
+  </body>
+</html>

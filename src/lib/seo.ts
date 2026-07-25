@@ -1,4 +1,4 @@
-import { COMPANY, NAV_ITEMS, LEGAL_ITEMS } from './site';
+import { COMPANY, NAV_ITEMS, LEGAL_ITEMS, SOCIAL_LINKS } from './site';
 import type { Faq } from './faqs';
 
 /** Absolute URL helper. */
@@ -19,15 +19,30 @@ export function organizationLd(site: URL | undefined) {
     telephone: COMPANY.phone,
     description:
       'Strategy-led asset protection and succession advisory for Australian business owners, families, and asset holders.',
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: 'Corporate House, 138 Juliette St',
-      addressLocality: 'Greenslopes',
-      addressRegion: 'QLD',
-      postalCode: '4120',
-      addressCountry: 'AU',
-    },
+    // Both the street address and the postal address, matching what the contact page
+    // and footer display.
+    address: [
+      {
+        '@type': 'PostalAddress',
+        name: 'Street address',
+        streetAddress: '2/14 Edgewater Court',
+        addressLocality: 'Robina',
+        addressRegion: 'Qld',
+        postalCode: '4226',
+        addressCountry: 'AU',
+      },
+      {
+        '@type': 'PostalAddress',
+        name: 'Postal address',
+        postOfficeBoxNumber: 'PO Box 4028',
+        addressLocality: 'Ashmore',
+        addressRegion: 'Qld',
+        postalCode: '4214',
+        addressCountry: 'AU',
+      },
+    ],
     areaServed: 'AU',
+    sameAs: SOCIAL_LINKS.map((s) => s.href),
   };
 }
 

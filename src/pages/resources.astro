@@ -3,89 +3,86 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import SectionLabel from '../components/ui/SectionLabel.astro';
 import Button from '../components/ui/Button.astro';
-import { ArrowRight, Download, MessageSquareText, Mail, FileText, ClipboardCheck, SearchCheck } from 'lucide-react';
+import FinalCTA from '../components/FinalCTA.astro';
+import { ArrowRight, Download, FileText } from 'lucide-react';
 import { getArticleCards } from '../lib/sanity';
-import { ARTICLE_STUBS } from '../lib/articles';
+import { APPROVED_ARTICLE_CARDS, ARTICLE_IMAGE_FALLBACK, formatArticleDate } from '../lib/articles';
 import { BROCHURES } from '../lib/site';
 
-// Articles come from Sanity once a real project has content; until then we show
-// the prototype stubs so the page is complete.
-const fromCms = await getArticleCards();
-const articles = fromCms.length ? fromCms : ARTICLE_STUBS;
+// Simplified Resources page (per client brief): intro, free guide, featured video,
+// guides & brochures, Latest Articles, discovery CTA. No categories or filters.
+// Latest Articles = client-published Sanity articles merged with the approved articles,
+// newest first. Future articles added in /studio appear here automatically.
+const cms = await getArticleCards();
+const cmsSlugs = new Set(cms.map((a) => a.slug));
+const articles = [...cms, ...APPROVED_ARTICLE_CARDS.filter((a) => !cmsSlugs.has(a.slug))].sort(
+  (a, b) => (b.publishedAt ?? '').localeCompare(a.publishedAt ?? '')
+);
 
-const contentTypes = [
-  { icon: MessageSquareText, title: 'Short Videos', text: 'Brief, practical videos explaining asset protection, succession, structures, and family wealth risk in plain English.' },
-  { icon: Mail, title: 'Podcast & Audio', text: 'Future audio conversations and short episodes for clients who prefer to listen rather than read.' },
-  { icon: FileText, title: 'Written Guides', text: 'Plain-English guides that explain key concepts, risks, and planning issues in more detail.' },
-  { icon: ClipboardCheck, title: 'Downloadable Resources', text: 'Checklists, worksheets, and free resources to help you prepare for better conversations.' },
-  { icon: SearchCheck, title: 'Articles', text: 'Occasional written articles for deeper explanation, SEO, and practical education.' },
-];
-
+const VIDEO_ID = 'xHpmte7mdYM';
+const VIDEO_TITLE = 'Five Asset Protection Risks People Often Miss';
 ---
 
 <BaseLayout
   title="Resources - FWP Advisory"
-  description="Practical videos, guides, downloads, audio, and articles on asset protection, succession, and family wealth risk."
+  description="Practical guides, a short video, and articles on asset protection, succession, and family wealth risk."
 >
   <PageHero
     label="Resources"
-    title="Resources to help you understand asset protection, succession, and family wealth risk"
-    body="Practical videos, guides, downloads, audio, and articles for business owners, families, and clients who want to better understand risk, structures, and control."
+    title="Practical resources on asset protection, succession, and family wealth"
+    body="A free guide, a short video, and plain-English articles for business owners, families, and asset holders who want to understand risk, structures, and control."
+    booking={false}
   />
 
   <section class="relative z-10 mx-auto max-w-7xl px-6 pb-24 lg:px-8">
-    {/* Featured */}
+    {/* Free guide */}
     <div
-      class="grid gap-8 rounded-[2rem] border border-[#6FD7E3]/20 bg-[#6FD7E3]/10 p-8 md:p-10 lg:grid-cols-[0.9fr_1.1fr]"
+      class="grid gap-8 rounded-[2rem] border border-[#6FD7E3]/20 bg-[#6FD7E3]/10 p-8 md:p-10 lg:grid-cols-[1fr_auto] lg:items-center"
     >
       <div>
-        <SectionLabel>Featured resource</SectionLabel>
+        <SectionLabel>Free guide</SectionLabel>
         <h2 class="text-3xl font-semibold tracking-tight text-white md:text-4xl">
-          Start with the family wealth protection guide
+          The Guide to Protecting Family Wealth
         </h2>
-        <p class="mt-5 text-base leading-7 text-white/70">
+        <p class="mt-5 max-w-2xl text-base leading-7 text-white/70">
           Download the guide if you are interested in asset protection and succession planning, but
           not ready to book a Discovery Meeting yet.
         </p>
-        <div class="mt-7">
-          <Button href="/guide">Download Free Guide <ArrowRight className="ml-2 h-4 w-4" /></Button>
-        </div>
       </div>
-      <div class="rounded-3xl border border-white/10 bg-[#0E1020]/55 p-7">
-        <div class="aspect-video rounded-2xl border border-[#6FD7E3]/20 bg-[#6FD7E3]/10 p-6">
-          <div class="flex h-full flex-col items-center justify-center text-center">
-            <MessageSquareText className="mb-5 h-10 w-10 text-[#6FD7E3]" />
-            <h3 class="text-xl font-semibold text-white">Featured video placeholder</h3>
-            <p class="mt-3 max-w-md text-sm leading-6 text-white/60">
-              Future video: 5 asset protection risks business owners and families often miss.
-            </p>
-          </div>
-        </div>
+      <div class="shrink-0">
+        <Button href="/guide">Get the free guide <ArrowRight className="ml-2 h-4 w-4" /></Button>
       </div>
     </div>
 
-    {/* Content types */}
-    <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-5">
-      {
-        contentTypes.map(({ icon: Icon, title, text }) => (
-          <div class="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
-            <Icon className="mb-5 h-7 w-7 text-[#6FD7E3]" />
-            <h3 class="text-lg font-semibold text-white">{title}</h3>
-            <p class="mt-3 text-sm leading-6 text-white/65">{text}</p>
-          </div>
-        ))
-      }
+    {/* Featured video */}
+    <div class="mt-16">
+      <SectionLabel>Featured video</SectionLabel>
+      <h2 class="mt-2 text-3xl font-semibold tracking-tight text-white md:text-4xl">
+        {VIDEO_TITLE}
+      </h2>
+      <div
+        class="mt-7 aspect-video w-full overflow-hidden rounded-3xl border border-white/10 bg-black"
+      >
+        <iframe
+          class="h-full w-full"
+          src={`https://www.youtube-nocookie.com/embed/${VIDEO_ID}`}
+          title={VIDEO_TITLE}
+          loading="lazy"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </div>
     </div>
 
-    {/* Guides & brochures (downloadable PDFs) */}
+    {/* Guides & brochures */}
     <div class="mt-16">
       <SectionLabel>Guides & brochures</SectionLabel>
       <h2 class="mt-2 text-3xl font-semibold tracking-tight text-white md:text-4xl">
         Free downloadable guides
       </h2>
       <p class="mt-4 max-w-2xl text-base leading-7 text-white/70">
-        Plain-English brochures on common tax, super, and business issues. General
-        information only - not legal, tax, or financial advice.
+        Plain-English brochures on common tax, super, and business issues. General information only -
+        not legal, tax, or financial advice.
       </p>
       <div class="mt-8 grid gap-6 md:grid-cols-3">
         {
@@ -107,40 +104,52 @@ const contentTypes = [
       </div>
     </div>
 
-    {/* Articles (from Sanity, or prototype stubs until content exists) */}
-    <div class="mt-12 grid gap-6 md:grid-cols-3">
-      {
-        articles.map((item) => (
-          <article class="rounded-3xl border border-white/10 bg-white/[0.04] p-7">
-            <div class="mb-5 inline-flex rounded-full border border-[#6FD7E3]/20 bg-[#6FD7E3]/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#8FE3EC]">
-              {item.category}
-            </div>
-            <h2 class="text-xl font-semibold leading-7 text-white">{item.title}</h2>
-            <p class="mt-4 text-sm leading-6 text-white/65">{item.summary}</p>
-            {item.slug ? (
-              <a
-                href={`/resources/${item.slug}`}
-                class="mt-6 inline-flex items-center text-sm font-semibold text-[#6FD7E3] hover:text-[#8FE3EC]"
-              >
-                Read article <ArrowRight className="ml-2 h-4 w-4" />
-              </a>
-            ) : (
-              <button class="mt-6 inline-flex items-center text-sm font-semibold text-[#6FD7E3] hover:text-[#8FE3EC]">
-                Resource placeholder <ArrowRight className="ml-2 h-4 w-4" />
-              </button>
-            )}
-          </article>
-        ))
-      }
-    </div>
-
-    {/* Future CMS area */}
-    <div class="mt-10 rounded-3xl border border-[#6FD7E3]/20 bg-[#6FD7E3]/10 p-8">
-      <h3 class="text-2xl font-semibold text-white">Future CMS content area</h3>
-      <p class="mt-4 text-white/70">
-        In the production website, this section should be connected to a CMS so videos, audio
-        episodes, guides, resources, and articles can be published without changing the website code.
-      </p>
+    {/* Latest articles */}
+    <div class="mt-16">
+      <SectionLabel>Latest articles</SectionLabel>
+      <h2 class="mt-2 text-3xl font-semibold tracking-tight text-white md:text-4xl">
+        Latest articles
+      </h2>
+      <div class="mt-8 grid gap-6 md:grid-cols-3">
+        {
+          articles.map((item) => (
+            <article class="flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04]">
+              {(item.image ?? ARTICLE_IMAGE_FALLBACK[item.slug ?? '']) && (
+                /* One editorial family: same crop, same restrained navy overlay. */
+                <div class="relative aspect-[16/9] w-full overflow-hidden">
+                  <img
+                    src={item.image ?? ARTICLE_IMAGE_FALLBACK[item.slug ?? '']}
+                    alt=""
+                    loading="lazy"
+                    class="h-full w-full object-cover"
+                  />
+                  <div class="absolute inset-0 bg-[#0E1020]/35" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-[#0E1020]/85 to-transparent" />
+                </div>
+              )}
+              <div class="flex flex-1 flex-col p-7">
+                {formatArticleDate(item.publishedAt) && (
+                  <time datetime={item.publishedAt} class="mb-3 block text-xs font-medium uppercase tracking-[0.14em] text-white/40">
+                    {formatArticleDate(item.publishedAt)}
+                  </time>
+                )}
+                <h3 class="text-lg font-semibold leading-7 text-white">{item.title}</h3>
+                <p class="mt-4 flex-1 text-sm leading-6 text-white/65">{item.summary}</p>
+                {item.slug && (
+                  <a
+                    href={`/resources/${item.slug}`}
+                    class="mt-6 inline-flex items-center text-sm font-semibold text-[#6FD7E3] hover:text-[#8FE3EC]"
+                  >
+                    Read article <ArrowRight className="ml-2 h-4 w-4" />
+                  </a>
+                )}
+              </div>
+            </article>
+          ))
+        }
+      </div>
     </div>
   </section>
+
+  <FinalCTA />
 </BaseLayout>

@@ -1,0 +1,53 @@
+---
+import PageHero from './PageHero.astro';
+import type { LegalDocData } from '../lib/legal';
+
+interface Props {
+  doc: LegalDocData;
+  intro?: string;
+}
+
+const { doc, intro } = Astro.props;
+---
+
+<PageHero label="Legal" title={doc.title} body={intro} booking={false} />
+
+<section class="relative z-10 mx-auto max-w-4xl px-6 pb-28 lg:px-8">
+  <div class="rounded-3xl border border-white/10 bg-white/[0.03] p-8 md:p-10">
+    {doc.effectiveDate && (
+      <p class="mb-8 text-sm font-medium uppercase tracking-[0.18em] text-[#8FE3EC]">
+        Effective date: {doc.effectiveDate}
+      </p>
+    )}
+
+    <div class="space-y-4 text-base leading-7 text-white/72">
+      {doc.intro.map((block) => ('p' in block ? <p>{block.p}</p> : null))}
+    </div>
+
+    <div class="mt-10 space-y-10">
+      {
+        doc.sections.map((section) => (
+          <div>
+            <h2 class="text-xl font-semibold text-white">{section.heading}</h2>
+            <div class="mt-4 space-y-4 text-base leading-7 text-white/72">
+              {section.blocks.map((block) =>
+                'p' in block ? (
+                  <p>{block.p}</p>
+                ) : (
+                  <ul class="ml-1 space-y-2">
+                    {block.ul.map((item) => (
+                      <li class="flex gap-3">
+                        <span class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#6FD7E3]" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )
+              )}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
