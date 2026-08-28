@@ -54,5 +54,37 @@ export async function getArticleBySlug(slug: string): Promise<ArticleFull | null
   }
 }
 
-// Further queries (videos, resources, faqs, siteSettings) follow the same
-// guarded pattern and are added as those sections move onto the CMS.
+export interface FeaturedVideo {
+  title: string;
+  embedId: string;
+}
+
+const VIDEO_QUERY = `*[_type == "video" && (defined(embedId) || defined(url))]
+  | order(coalesce(publishedAt, _createdAt) desc)[0]{ title, embedId, url }`;
+
+/**
+ * YouTube id from whatever an editor pasted: a bare id, a youtu.be link, a
+ * watch link, or an embed link. Null when nothing id-shaped is found.
+ */
+export function youtubeId(value?: string): string | null {
+  if (!value) return null;
+  const trimmed = value.trim();
+  if (/^[\w-]{11}$/.test(trimmed)) return trimmed;
+  return trimmed.match(/(?:youtu\.be\/|\/embed\/|[?&]v=)([\w-]{11})/)?.[1] ?? null;
+}
+
+/** Newest video from the CMS for the Resources page. Null until one is published. */
+export async function getFeaturedVideo(): Promise<FeaturedVideo | null> {
+  if (!isSanityConfigured()) return null;
+  try {
+    const doc = await sanity.fetch<{ title?: string; embedId?: string; url?: string }>(VIDEO_QUERY);
+    const embedId = youtubeId(doc?.embedId) ?? youtubeId(doc?.url);
+    if (!doc?.title || !embedId) return null;
+    return { title: doc.title, embedId };
+  } catch {
+    return null;
+  }
+}
+
+// Further queries (resources, faqs, siteSettings) follow the same guarded
+// pattern and are added as those sections move onto the CMS.

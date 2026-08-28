@@ -25,10 +25,10 @@ export function organizationLd(site: URL | undefined) {
       {
         '@type': 'PostalAddress',
         name: 'Street address',
-        streetAddress: '2/14 Edgewater Court',
-        addressLocality: 'Robina',
+        streetAddress: '21 Crombie Avenue',
+        addressLocality: 'Bundall',
         addressRegion: 'Qld',
-        postalCode: '4226',
+        postalCode: '4217',
         addressCountry: 'AU',
       },
       {
