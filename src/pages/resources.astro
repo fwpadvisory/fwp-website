@@ -5,7 +5,7 @@ import SectionLabel from '../components/ui/SectionLabel.astro';
 import Button from '../components/ui/Button.astro';
 import FinalCTA from '../components/FinalCTA.astro';
 import { ArrowRight, Download, FileText } from 'lucide-react';
-import { getArticleCards } from '../lib/sanity';
+import { getArticleCards, getFeaturedVideo } from '../lib/sanity';
 import { APPROVED_ARTICLE_CARDS, ARTICLE_IMAGE_FALLBACK, formatArticleDate } from '../lib/articles';
 import { BROCHURES } from '../lib/site';
 
@@ -19,8 +19,11 @@ const articles = [...cms, ...APPROVED_ARTICLE_CARDS.filter((a) => !cmsSlugs.has(
   (a, b) => (b.publishedAt ?? '').localeCompare(a.publishedAt ?? '')
 );
 
-const VIDEO_ID = 'xHpmte7mdYM';
-const VIDEO_TITLE = 'Five Asset Protection Risks People Often Miss';
+// Featured video comes from the CMS (newest published `video` document), so the
+// client can swap it in /studio. Falls back to the original if none is published.
+const cmsVideo = await getFeaturedVideo();
+const VIDEO_ID = cmsVideo?.embedId ?? 'xHpmte7mdYM';
+const VIDEO_TITLE = cmsVideo?.title ?? 'Five Asset Protection Risks People Often Miss';
 ---
 
 <BaseLayout

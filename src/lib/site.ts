@@ -69,7 +69,7 @@ export const COMPANY = {
   email: 'hello@fwpadvisory.com.au',
   phone: '+61 475 219 534',
   phoneHref: 'tel:+61475219534',
-  address: '2/14 Edgewater Court, Robina Qld 4226',
+  address: '21 Crombie Avenue, Bundall Qld 4217',
   postalAddress: 'PO Box 4028, Ashmore Qld 4214',
   compliance: 'General information only. Not legal or financial advice.',
 } as const;
