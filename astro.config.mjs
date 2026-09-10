@@ -14,6 +14,14 @@ const SITE_URL = env.PUBLIC_SITE_URL || 'https://fwpadvisory.com.au';
 export default defineConfig({
   site: SITE_URL,
   output: 'static',
+  // One URL per page, no trailing slash. Every internal link, the breadcrumb and
+  // Article JSON-LD, and the www redirect already use /about; the canonical and
+  // sitemap were emitting /about/ while both forms returned 200, so Google saw
+  // duplicates and overrode our canonical. With these two settings the canonical,
+  // og:url and sitemap come out slash-free, and the Vercel adapter adds a 308
+  // from /about/ to /about.
+  trailingSlash: 'never',
+  build: { format: 'file' },
   adapter: vercel(),
   integrations: [
     react(),
