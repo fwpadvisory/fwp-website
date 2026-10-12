@@ -54,13 +54,25 @@ export async function getArticleBySlug(slug: string): Promise<ArticleFull | null
   }
 }
 
-export interface FeaturedVideo {
+export interface VideoCard {
+  id: string;
   title: string;
   embedId: string;
 }
 
-const VIDEO_QUERY = `*[_type == "video" && (defined(embedId) || defined(url))]
-  | order(coalesce(publishedAt, _createdAt) desc)[0]{ title, embedId, url }`;
+interface RawVideo {
+  _id: string;
+  title?: string;
+  featured?: boolean;
+  embedId?: string;
+  url?: string;
+  publishedAt?: string;
+  _createdAt?: string;
+}
+
+const VIDEOS_QUERY = `*[_type == "video" && (defined(embedId) || defined(url))]{
+  _id, title, featured, embedId, url, publishedAt, _createdAt
+}`;
 
 /**
  * YouTube id from whatever an editor pasted: a bare id, a youtu.be link, a
@@ -73,16 +85,33 @@ export function youtubeId(value?: string): string | null {
   return trimmed.match(/(?:youtu\.be\/|\/embed\/|[?&]v=)([\w-]{11})/)?.[1] ?? null;
 }
 
-/** Newest video from the CMS for the Resources page. Null until one is published. */
-export async function getFeaturedVideo(): Promise<FeaturedVideo | null> {
-  if (!isSanityConfigured()) return null;
+/**
+ * Videos for the Resources page: the featured one first, then the rest newest
+ * first. The editor ticks "Featured" in Studio to pin the main video; with
+ * nothing ticked the newest stands in, and if several are ticked the newest of
+ * those wins. Anything without a usable YouTube id is dropped.
+ */
+export async function getVideos(): Promise<VideoCard[]> {
+  if (!isSanityConfigured()) return [];
   try {
-    const doc = await sanity.fetch<{ title?: string; embedId?: string; url?: string }>(VIDEO_QUERY);
-    const embedId = youtubeId(doc?.embedId) ?? youtubeId(doc?.url);
-    if (!doc?.title || !embedId) return null;
-    return { title: doc.title, embedId };
+    const docs = (await sanity.fetch<RawVideo[]>(VIDEOS_QUERY)) ?? [];
+    const dateOf = (v: RawVideo) => v.publishedAt ?? v._createdAt ?? '';
+    return docs
+      .map((doc) => ({ doc, embedId: youtubeId(doc.embedId) ?? youtubeId(doc.url) }))
+      .filter((v) => Boolean(v.embedId && v.doc.title))
+      .sort((a, b) => {
+        const af = Boolean(a.doc.featured);
+        const bf = Boolean(b.doc.featured);
+        if (af !== bf) return af ? -1 : 1;
+        return dateOf(b.doc).localeCompare(dateOf(a.doc));
+      })
+      .map(({ doc, embedId }) => ({
+        id: doc._id,
+        title: doc.title as string,
+        embedId: embedId as string,
+      }));
   } catch {
-    return null;
+    return [];
   }
 }
 

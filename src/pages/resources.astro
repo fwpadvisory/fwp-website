@@ -4,8 +4,8 @@ import PageHero from '../components/PageHero.astro';
 import SectionLabel from '../components/ui/SectionLabel.astro';
 import Button from '../components/ui/Button.astro';
 import FinalCTA from '../components/FinalCTA.astro';
-import { ArrowRight, Download, FileText } from 'lucide-react';
-import { getArticleCards, getFeaturedVideo } from '../lib/sanity';
+import { ArrowRight, Download, FileText, Play } from 'lucide-react';
+import { getArticleCards, getVideos } from '../lib/sanity';
 import { APPROVED_ARTICLE_CARDS, ARTICLE_IMAGE_FALLBACK, formatArticleDate } from '../lib/articles';
 import { BROCHURES } from '../lib/site';
 
@@ -19,11 +19,13 @@ const articles = [...cms, ...APPROVED_ARTICLE_CARDS.filter((a) => !cmsSlugs.has(
   (a, b) => (b.publishedAt ?? '').localeCompare(a.publishedAt ?? '')
 );
 
-// Featured video comes from the CMS (newest published `video` document), so the
-// client can swap it in /studio. Falls back to the original if none is published.
-const cmsVideo = await getFeaturedVideo();
-const VIDEO_ID = cmsVideo?.embedId ?? 'xHpmte7mdYM';
-const VIDEO_TITLE = cmsVideo?.title ?? 'Five Asset Protection Risks People Often Miss';
+// Videos come from the CMS. The editor ticks "Featured" in Studio to pin the
+// main one; everything else falls into "More videos", which stays hidden while
+// there is only one video. Falls back to the original if the CMS has none.
+const videos = await getVideos();
+const moreVideos = videos.slice(1);
+const VIDEO_ID = videos[0]?.embedId ?? 'xHpmte7mdYM';
+const VIDEO_TITLE = videos[0]?.title ?? 'Five Asset Protection Risks People Often Miss';
 ---
 
 <BaseLayout
@@ -76,6 +78,57 @@ const VIDEO_TITLE = cmsVideo?.title ?? 'Five Asset Protection Risks People Often
           allowfullscreen></iframe>
       </div>
     </div>
+
+    {/* More videos - only once a second video exists in the CMS */}
+    {
+      moreVideos.length > 0 && (
+        <div class="mt-16">
+          <SectionLabel>More videos</SectionLabel>
+          <h2 class="mt-2 text-3xl font-semibold tracking-tight text-white md:text-4xl">
+            More videos
+          </h2>
+          <div class="mt-8 grid gap-6 md:grid-cols-3">
+            {moreVideos.map((video) => (
+              <article class="flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04]">
+                <a
+                  href={`https://www.youtube.com/watch?v=${video.embedId}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group relative block aspect-[16/9] w-full overflow-hidden"
+                  aria-label={`Watch ${video.title} on YouTube`}
+                >
+                  {/* Same editorial treatment as the article thumbnails. */}
+                  <img
+                    src={`https://i.ytimg.com/vi/${video.embedId}/hqdefault.jpg`}
+                    alt=""
+                    loading="lazy"
+                    class="h-full w-full object-cover"
+                  />
+                  <div class="absolute inset-0 bg-[#0E1020]/35" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-[#0E1020]/85 to-transparent" />
+                  <span class="absolute inset-0 grid place-items-center">
+                    <span class="grid h-14 w-14 place-items-center rounded-full bg-[#0E1020]/70 ring-1 ring-white/25 transition-colors duration-200 group-hover:bg-[#6FD7E3]">
+                      <Play className="ml-0.5 h-5 w-5 text-white transition-colors duration-200 group-hover:text-[#0E1020]" />
+                    </span>
+                  </span>
+                </a>
+                <div class="flex flex-1 flex-col p-7">
+                  <h3 class="text-lg font-semibold leading-7 text-white">{video.title}</h3>
+                  <a
+                    href={`https://www.youtube.com/watch?v=${video.embedId}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="mt-6 inline-flex items-center text-sm font-semibold text-[#6FD7E3] hover:text-[#8FE3EC]"
+                  >
+                    <Play className="mr-2 h-4 w-4" /> Watch on YouTube
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      )
+    }
 
     {/* Guides & brochures */}
     <div class="mt-16">
